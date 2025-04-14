@@ -13,6 +13,10 @@ print(2**2)  # 2의 2승
 # 어느 게시판에서는 한 페이지당 20개의 게시글이 보여진다.
 # 게시판의 총 게시글은 162개이다.
 # 게시판의 총 페이지의 갯수와 마지막페이지의 게시글 수를 print 하시오.
+total_post = 162
+total_page = 162 // 20
+last_page_post = 162 % 20
+print(f"총페이지:{total_page}, 마지막 페이지 게시글 수:{last_page_post}")
 
 # str (결과값의 자료형 : str)
 print("안녕" + "하세요")
@@ -50,6 +54,15 @@ print(x == z)
 print(not x == z)
 print(not x == z and x == z)
 print(not x == z or x == z)
+
+# 연산자 우선순위
+# ( ) > ** > *, /, //, % > +, - > 비교연산자(==, !=, >, <) > not(논리연산자) > and(논리연산자) > or(논리연산자)
+a = True or False and False
+print(f"a의결과: {a}")
+a = (True or False) and False
+print(f"a의결과: {a}")
+a = (True or False) and not False
+print(f"a의결과: {a}")
 
 # 조건연산자(삼항 연산자)
 # if 뒤에 조건식을 써도 되지만, 최종적으로는 bool자료형이 오기만 하면 된다.
