@@ -78,11 +78,4 @@ print((fnum * 10 + fnum2 * 10) / 10)
 ex) is_empty = True O is_not_empty = False X
 """
 
-# is_mz = True #True / False Boolean
-# str = "python" #True
-# str = "" #False
-# list = [1, 2, 3] #True
-# list = [] #False
-# tuple = {} #False
-# dict = {} #False
-# num = 0 #False
+
