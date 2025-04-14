@@ -77,16 +77,6 @@ id = email[0:id_index]
 print(id)
 
 
-# 주민번호 문제
-# 931203-1234567
-ssn = "931203-1234567"
-
-# find_idx = ssn.find("-")
-
-# ssn[:find_idx + 1] + ssn[find_idx+1:]
-# print(ssn[:find_idx + 1] + "*" * len(ssn[find_idx + 1:]))
-
-
 # replace
 a = "life is too short you need python"
 a_replace = a.replace(" ","_")
