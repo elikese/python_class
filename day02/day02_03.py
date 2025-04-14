@@ -53,6 +53,18 @@ elif is_manager:
 else:
     print("일반 사용자 페이지에 접근합니다")  # 나머지는 일반 사용자
 
+# 당연히 if문은 중첩이 됩니다.
+
+if is_submitted:
+    print("제출")
+    if is_cheated:
+        print("부정행위")
+    elif is_late:
+        print("지각 제출")
+else:
+    print("미제출")
+
+# 논리적으로 오류가 없으면, 정답은 없습니다. -> 가독성, 코드관리의 측면에서 고민할 단계
 
 # 실습3) bmi 계산기
 # bmi = 체중(kg) / 신장(m)*신장(m)
