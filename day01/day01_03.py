@@ -29,8 +29,17 @@ a = "hello world!"
 print("a_upper:", a.upper())  # 전체 문자열 대문자로
 print("a_lower:", a.lower())  # 전체 문자열 소문자로
 
+# capitalize
 print("a_capitalize:", a.capitalize())
 print("a_capitalize:", a[:1].upper() + a[1:])
+
+# count
+print("a_count:", a.count("d", 6, 10))
+print("a_count:", a[6:10].count("d"))
+
+# in 연산자
+print("존재여부확인:", "h" in a)
+print("존재여부확인:", "hello" in a)
 
 # 문자열의 처음과 끝이 무엇으로 시작하는지 검사
 print("a_startswith:", a.startswith("he"))
