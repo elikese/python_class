@@ -16,11 +16,6 @@ print(bool(""))
 # num = 0 #False num = 100 #True
 # list, dict, tuple 내부가 비어있으면 False
 
-# 묵시적 형변환(자동으로 알아서 눈치껏 형변환해주는 것)
-# int + float => float , 나누기하면 자동으로 결과는 float으로 형변환
-# 참고) bool + int => int(True -> 1 / False -> 0)
-# if/elif 뒤에 문자열 / 숫자는 묵시적으로 논리값(bool형)으로 형변환된다 ("" / 0) -> False로 자동 형변환. ("어쩌고" / 100) -> True로 자동 형변환.
-
 # 연산자
 
 # 산술 연산자
