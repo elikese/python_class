@@ -144,8 +144,10 @@ for _ in range(5):
 *****
 을 출력해보세요!
 """
-
-for i in range(5):
-    for j in range(i + 1):
+n = 10
+for i in range(n):
+    for j in range((n - 1) - i):
+        print(" ", end="")
+    for k in range(i + 1):
         print("*", end="")
     print()
