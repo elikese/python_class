@@ -34,8 +34,8 @@ while True:
     # 오류 전에 검증 단계를 만들어서 사전에 처리
     예상번호 = input("정답은 몇번일까요? 추측해서 입력해 보세요(1~50): ")
 
-    # str.isdigit() # 문자열이 숫자로만 이루어졌는가? 를 검증
-    if not 예상번호.isdigit():
+    # str.isdecimal() # 문자열이 0 ~ 9로만 구성되었는가? (음수, 소수 판독 불가능)
+    if not 예상번호.isdecimal():
         print("숫자만 입력해주세요")
         continue
     형변환예상번호 = int(예상번호)
