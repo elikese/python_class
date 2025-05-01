@@ -1,4 +1,4 @@
-# *args
+# *args 패킹
 # 여러개로 들어온 매개변수들을 tuple에 담아서 하나로 만들어 준다.
 # 매개변수의 갯수가 가변적일때(변할때) 사용 된다.
 def args_function(*args):  # 매개변수명은 자유(매개변수 앞에 *이 하나 있냐 없냐)
@@ -92,3 +92,26 @@ greetings("홍길동", "반갑", "습니다", "~!")
 greetings(
     "홍길동", "반갑", "습니다", finish="~!"
 )  # 매개변수의 이름을 정확히 기입해서 알려줘야한다.
+
+# *args 언패킹! -> 순서로 관리되는 것들을
+
+
+def print_family_name(mother, father, *siblings):
+    print(f"어머니 : {mother}")
+    print(f"아버지 : {father}")
+    for index, sibling in enumerate(siblings):
+        print(f"형제{index + 1} : {sibling}")
+
+
+print_family_name("김영희", "박길동", "박첫쨰", "박둘째", "박셋째")
+
+# 매개변수에 패킹으로 가능한 자료형 -> 리스트, 튜플, 리스트비슷한것들, set(순서없음)...iterable한것 모두 다
+# dict도 가능은 하지만, *dict하게되면, key만 튜플로 묶어서 가져갑니다.
+sibling_list = ("박첫째", "박둘째", "박셋째")
+
+print_family_name(
+    "김영희", "박길동", *sibling_list
+)  # *을 붙히면, 이미 패킹되어 있구나라는걸 인식해준다.
+
+# 그 이후에 추가해주면 같이 패킹해줍니다.
+print_family_name("김영희", "박길동", *sibling_list, "박넷째")
