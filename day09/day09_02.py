@@ -89,3 +89,53 @@ fruits = [
 
 result = max(fruits, key=lambda fruit: (fruit["price"], fruit["weight"]))
 print(result)
+
+
+# list comprehension(리스트 컴프리헨션)
+# 1. 복사한 리스트를 (원본을 보존하면서: 슬라이싱과 동일)
+# 2. 순회하면서 (for문)
+# 3. 조건에따라 (if문)
+# 4. 데이터를 가공하여 추가(append와 비슷한 기능)
+
+# [append영역 / for문영역 / if문영역]
+
+numbers = [1, 2, 3, 4, 5]
+result = [x * 2 for x in numbers if x % 2 == 0]
+print(result)
+
+clients = [
+    {
+        "이름": "김철수",
+        "나이": 20,
+    },
+    {
+        "이름": "박철수",
+        "나이": 15,
+    },
+    {
+        "이름": "이철수",
+        "나이": 36,
+    },
+    {
+        "이름": "최철수",
+        "나이": 12,
+    },
+    {
+        "이름": "강철수",
+        "나이": 33,
+    },
+]
+
+name_list = [client["이름"] for client in clients]
+print(name_list)
+
+# 반복문 + 조건문 + 데이터가공 "한줄로"
+name_list2 = [client["이름"] + "고객님" for client in clients if client["나이"] >= 20]
+print(name_list2)
+
+name_list3 = []
+for client in clients:
+    if client["나이"] >= 20:
+        name_list3.append(client["이름"] + "고객님")
+
+print(name_list3)
