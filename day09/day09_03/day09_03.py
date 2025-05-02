@@ -11,8 +11,8 @@ file.close()
 - 경로(절대경로, 상대경로)
 절대경로(c:\python\python_class\example.txt)
 상대경로('../' , './') -> ../ 현재 파일의 위로가기, ./ 현재파일의 폴더위치
-day09_01.py과 같은 위치에 example.txt가 생겼으니
-day09_01.py에서 './example.txt'로 접근 가능
+day09_03.py과 같은 위치에 example.txt가 생겼으니
+day09_03.py에서 './example.txt'로 접근 가능
 day08_01.py에서 '../day09/example.txt로 접근가능
 
 - 파일모드
@@ -39,8 +39,9 @@ with open("example.txt", "r", encoding="utf-8") as f:
     a = f.read(10)  # 10바이트 읽어오기
     print(a)
     a = f.read(10)  # 마지막 읽은 위치로 부터 추가로 10바이트 읽어옴
+    # -> 지금까지 읽은 위치를 내부적으로 저장하고 있다(커서)
     print(a)
-    f.seek(0, 0)
+    f.seek(0, 0)  # 커서 초기화
     print("-----------------")
     a = f.readline()  # \n 이스케이프 문자 인식해서 한줄씩 읽어온다
     print(a, end="")  # \n 까지 읽어 오는거라서 print의 end옵션을 통해 개행x

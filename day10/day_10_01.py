@@ -30,9 +30,9 @@ while True:
         print(result["message"])
 
     if choice == "1":
-        pass # 일정을 만들어서 추가하는 코드
+        pass  # 일정을 만들어서 추가하는 코드
     if choice == "2":
-        pass #
+        pass  #
     if choice == "3":
         pass
     if choice == "4":
