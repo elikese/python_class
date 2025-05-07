@@ -11,8 +11,8 @@ file.close()
 - 경로(절대경로, 상대경로)
 절대경로(c:\python\python_class\example.txt)
 상대경로('../' , './') -> ../ 현재 파일의 위로가기, ./ 현재파일의 폴더위치
-day09_03.py과 같은 위치에 example.txt가 생겼으니
-day09_03.py에서 './example.txt'로 접근 가능
+day10_01.py과 같은 위치에 example.txt가 생겼으니
+day10_01.py에서 './example.txt'로 접근 가능
 day08_01.py에서 '../day09/example.txt로 접근가능
 
 - 파일모드
@@ -75,6 +75,7 @@ with open("img.png", "rb") as f:
     print(data[:100])
     half = len(a) // 2
 
+
 # txt말고, csv, xml, JSON
 # JSON - 웹에서 데이터를 주고받는 용도로 사용 됨
 """
@@ -95,6 +96,29 @@ dict_data = {
 with open("data.json", "w", encoding="utf-8") as f:
     # dump(dict자료, f(파일), ensure_ascii:한글이 깨지지않게, indent(들여쓰기)
     json.dump(dict_data, f, ensure_ascii=False, indent=4)
+
+# json과 dict의 차이?
+# json의 key는 반드시 "문자열", value는 숫자, 문자열, list, dict 가능
+# dict의 key는 문자열, 정수, 튜플....(immutable:불변형)가능 value는 파이썬의 모든 자료형이 가능
+# dict -> JSON으로 가려면, key의 자료형들을 문자열로 바꿔줘야한다.
+"""
+{
+1: "사괴",
+2: "바나나",
+(1,2): "에드워드리 음식점",
+}
+
+JSON으로 변환시
+
+{
+"1": "사과",
+"2": "바나나",
+"(1,2)": "에드워드리 음식점",
+}
+
+이 모든 과정을 import한 josn 모듈이 알아서 해준다.
+우리는 모듈에 이미 작성된 함수만 호출하면 된다.(dump, load)
+"""
 
 with open("data.json", "r", encoding="utf-8") as f:
     new_dict_data = json.load(f)
