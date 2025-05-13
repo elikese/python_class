@@ -3,8 +3,8 @@
 
 a = 10
 b = "abc"
-print(type(a))  # int 자료형
-print(type(b))  # str 자료형
+print(type(a))  # int 자료형 (a의 클래스)
+print(type(b))  # str 자료형 (b의 클래스)
 
 print(b.upper())  # str 자료형에는 여러 함수(메서드)가 존재 한다
 
@@ -84,9 +84,17 @@ cat2.meow()
 생성되서 메모리에 적재되는게 인스턴스(객체)
 """
 
+
+# self 가 뭐지?
+# self -> 현재 인스턴스의 메모리 주소
 class Person:
     def __init__(self, name):
+        print("__init__호출")
         self.name = name
+
+    # id() 메모리 주소를 10진수로 변환해서 알려줍니다
+    def print_memory_address(self):
+        print((id(self)))
 
 
 man1 = Person("철수")
@@ -94,12 +102,12 @@ man2 = Person("철수")
 
 print(man1 == man2)
 
-# __init__() < 설명 x 다음 시차에..
-# self 가 뭐지?
+man1.print_memory_address()
+man2.print_memory_address()
 
-print(id(man1))  # id() 메모리 주소를 10진수로 변환해서 알려줍니다
-print(id(man2))  # 메모리주소는 16진수 0x00014B7C1
+# 그렇다면, __init__()은 뭔가?
 
+# 실제로 생성자가 호출되면, 어떤일이 벌어지는 것일까?
 puppy_memory_address = Person.__new__(Person)
 print(puppy_memory_address)
 
