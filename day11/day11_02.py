@@ -104,7 +104,6 @@ print(man1 == man2)
 
 man1.print_memory_address()
 man2.print_memory_address()
-
 # 그렇다면, __init__()은 뭔가?
 
 # 실제로 생성자가 호출되면, 어떤일이 벌어지는 것일까?
