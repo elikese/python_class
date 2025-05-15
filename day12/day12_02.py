@@ -37,6 +37,8 @@ gas_car = GasolineCar("x3", "BMW", 40)
 
 e_car.drive()
 gas_car.drive()
+
+
 # Car를 상속한 ElectricCar / GasolineCar는
 # __init__ / drive를 오버라이드 했다.
 
@@ -49,6 +51,7 @@ def test_car(car):
 # 왜 이런걸 하나요?? 기능을 정의하는것(부모): 달린다 / 구체적인 기능을 구현하는걸(자식) 분리
 test_car(e_car)
 test_car(gas_car)
+
 
 # payment를 함수의 조합으로 구현 -> 함수가 함수를 매개변수로 받아서 사용하는 특징을 사용
 
@@ -121,4 +124,20 @@ naver = NaverPayment()
 order(kakao, "피자", "치킨")
 order(naver, "피자", "치킨")
 
+
 # 함수로 구현하고, 클래스로도 구현이 가능.
+
+
+class Character:
+    def __init__(self, nick_name):
+        self.nick_name = nick_name
+        self.HP = 100
+
+    def attack(self, opponent):
+        print(f"{opponent.nick_name}을 기본 공격(10)합니다")
+        opponent.HP -= 10
+
+
+# 실습) Character 클래스를 상속받는 Warrior(전사), Mage(마법사)를 구현
+#  Warrior(전사)와 Mage(마법사) attack을 오버라이드해서
+# 전사는 검으로 공격 / 마법사는 파이어 볼로 공격, 각각 데미지도 다르게 오버라이드 해보세요
