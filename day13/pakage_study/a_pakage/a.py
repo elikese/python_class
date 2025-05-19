@@ -9,6 +9,16 @@
 
 print(__name__)
 
+
+def add(num1, num2):
+    return num1 + num2
+
+
+class Calculation:
+    def sub(self, num1, num2):
+        return num1 - num2
+
+
 if __name__ == "__main__":
     print("a에서 출력!")
 
