@@ -29,7 +29,7 @@ for 숫자 in 숫자리스트:
 print(f"총합:{총합}")
 
 # range(): 숫자가 순서대로 들어있는 가짜리스트를 만들어 준다. -> 리스트가 아님(리스트 처럼쓰려면 list로 형변환)
-# range(a,b) -> a부터 b미만 [a,a+1,a+2,.....,b-1]
+# range(a_pakage,b_pakage) -> a부터 b미만 [a_pakage,a_pakage+1,a_pakage+2,.....,b_pakage-1]
 # range(n) = range(0,n) -> 0부터 n미만 [0,1,2,3,4,......,n-1]
 
 # 리스트로 형변환

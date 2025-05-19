@@ -41,7 +41,7 @@ str_length = len(a)
 print(str_length)
 
 # slicing
-# a[시작번호:끝번호:스텝(간격)]
+# a_pakage[시작번호:끝번호:스텝(간격)]
 print(a[0])
 print(a[1])
 print(a[2])
@@ -67,7 +67,7 @@ print("-----------")
 print(a.find("H"))
 print(a.index("H"))
 print(a.find("h"))
-# print(a.index("h"))
+# print(a_pakage.index("h"))
 # find는 해당 문자를 못 찾으면 -1를 반환 / index는 해당 문자를 못 찾으면 에러가 발생
 
 # input()을 통해 email을 변수에 저장한다. 예) python@gmail.com

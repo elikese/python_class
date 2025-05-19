@@ -7,7 +7,7 @@ for 짬뽕데이터 in 짬뽕리스트:
     print(짬뽕데이터, end=", ")
 print()
 
-# range(a,b) -> a 이상 b 미만의 숫자가 순서대로 담긴 리스트 비슷한 것을 만들어준다.
+# range(a_pakage,b_pakage) -> a_pakage 이상 b_pakage 미만의 숫자가 순서대로 담긴 리스트 비슷한 것을 만들어준다.
 for 숫자 in range(1, 11):
     print(숫자, end=" ")
 print()

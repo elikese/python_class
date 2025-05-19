@@ -16,8 +16,8 @@ day10_01.py에서 './example.txt'로 접근 가능
 day08_01.py에서 '../day09/example.txt로 접근가능
 
 - 파일모드
-r:read , w:write, a:append
-t:text(문자열로만 이루어진 파일), b:binary(이미지, jpg, mp3, exe)
+r:read , w:write, a_pakage:append
+t:text(문자열로만 이루어진 파일), b_pakage:binary(이미지, jpg, mp3, exe)
 보통은 rt, wt, rb, wb 같이 조합해서 사용합니다. t는 생략가능(t가 기본값)
 
 - encoding
@@ -59,7 +59,7 @@ with open("example2.txt", "w", encoding="utf-8") as f:
     f.write("python\n")
 
 # a는 파일의 마지막부터 이어쓰기
-with open("example2.txt", "a", encoding="utf-8") as f:
+with open("example2.txt", "a_pakage", encoding="utf-8") as f:
     f.write("python!\n")
 
 # writeLines : 리스트를 쓰기로

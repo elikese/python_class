@@ -104,10 +104,10 @@ def is_number(s):
         if not left or not right:  # "."만 있는 경우, ".5" or "3."
             return False
 
-        if left and not left.isdecimal():  # "a.3"
+        if left and not left.isdecimal():  # "a_pakage.3"
             return False
 
-        if right and not right.isdecimal():  # "3.a"
+        if right and not right.isdecimal():  # "3.a_pakage"
             return False
 
         return True
@@ -120,4 +120,4 @@ print(is_number("3.14"))
 print(is_number("-3.14"))
 print(is_number(".1"))
 print(is_number("3.r"))
-print(is_number("a.3"))
+print(is_number("a_pakage.3"))

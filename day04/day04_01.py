@@ -52,14 +52,14 @@ a = 10
 b = 20
 """
 다른언어는? 두 변수가 값을 바꾸려면 하나의 변수가 추가로 필요함
-int a = 10;
-int b = 20;
-int temp = a;
-a = b;
-b = temp;
+int a_pakage = 10;
+int b_pakage = 20;
+int temp = a_pakage;
+a_pakage = b_pakage;
+b_pakage = temp;
 """
 a, b = b, a
-print(f"a={a}, b={b}")
+print(f"a_pakage={a}, b_pakage={b}")
 
 a = 10
 b = 20

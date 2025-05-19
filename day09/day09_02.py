@@ -56,7 +56,7 @@ print(mapped_client_names)
 # 3. sorted(): key 함수 기준으로 정렬
 words = ["banana", "kiwi", "apple"]
 sorted_words = sorted(words)
-print(sorted_words)  # a, b, c 순서로 정렬
+print(sorted_words)  # a_pakage, b_pakage, c 순서로 정렬
 
 sorted_by_len = sorted(words, key=lambda x: len(x))
 print(sorted_by_len)  # 단어가 짧은(글자길이) 순서로 정렬
@@ -74,7 +74,7 @@ names = ["Kim", "Park", "Lee"]
 longest_name = max(names, key=lambda x: len(x))  # Park
 
 # key로 여러가지 기준을 만들순 없는가?
-# "Kim", "Lee"는 길이 기준으론 동률 -> 동률일때는 a,b,c... 순서로 정렬하고싶다!
+# "Kim", "Lee"는 길이 기준으론 동률 -> 동률일때는 a_pakage,b_pakage,c... 순서로 정렬하고싶다!
 longest_name2 = max(names, key=lambda x: (len(x), x))
 
 fruits = [

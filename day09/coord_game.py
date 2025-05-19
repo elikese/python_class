@@ -18,7 +18,7 @@ def apply_move(input_value, coord):
         return (x, y - 1)
     elif input_value == "s":
         return (x, y + 1)
-    elif input_value == "a":
+    elif input_value == "a_pakage":
         return (x - 1, y)
     elif input_value == "d":
         return (x + 1, y)
@@ -39,7 +39,7 @@ def is_valid_move(coord, map_size, obstacles):
 
 def coord_game(*, player, goal, map_size, obstacles):
     print("=== 좌표 이동 게임: G에 도달하세요! ===")
-    print("명령어: w(↑), s(↓), a(←), d(→), q(종료)")
+    print("명령어: w(↑), s(↓), a_pakage(←), d(→), q(종료)")
 
     while True:
         print_map(player, goal, map_size, obstacles)
@@ -48,7 +48,7 @@ def coord_game(*, player, goal, map_size, obstacles):
             print("목표 지점에 도착했습니다! 게임 클리어!")
             break
 
-        input_value = input("이동(w,a,s,d)입력 >> ")
+        input_value = input("이동(w,a_pakage,s,d)입력 >> ")
         move_result = apply_move(input_value, player)
 
         if move_result == "error":
@@ -66,7 +66,7 @@ game_options = {
     "obstacles": [(1, 0), (2, 2), (3, 1)],
 }
 # 실행
-# 추가참고) def fn(*arg, a, b) -> a,b 는 호출할때 키워드로 a="", b="" 명시해줘야했다.
-# 비슷한건데, def fn(*, a, b) -> a,b는 호출할때 키워드로 a="", b="" 명시해줘야한다.
+# 추가참고) def fn(*arg, a_pakage, b_pakage) -> a_pakage,b_pakage 는 호출할때 키워드로 a_pakage="", b_pakage="" 명시해줘야했다.
+# 비슷한건데, def fn(*, a_pakage, b_pakage) -> a_pakage,b는 호출할때 키워드로 a_pakage="", b_pakage="" 명시해줘야한다.
 
 coord_game(**game_options)

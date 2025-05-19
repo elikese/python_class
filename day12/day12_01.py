@@ -40,10 +40,10 @@ class BankAccount:
     def __init__(self, name, balance):
         self.name = name
         self.balance = balance
-        BankAccount.count += 1  # 질문가능성 있음(a)
+        BankAccount.count += 1  # 질문가능성 있음(a_pakage)
 
 
-# (a)에 대한 설명
+# (a_pakage)에 대한 설명
 # class 안의 함수는 클래스 변수를 참조할 수 없음
 # 함수안의 함수 -> 하위함수가 상위함수의 변수를 참조 할 수 있음
 # 어려운 설명 : class는 dict기반으로 만들어진 type의 인스턴스이다.

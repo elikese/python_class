@@ -43,9 +43,9 @@ print("존재여부확인:", "hello" in a)
 
 # 문자열의 처음과 끝이 무엇으로 시작하는지 검사
 print("a_startswith:", a.startswith("he"))
-# print("a_startswith:", a[:2] == "he")
+# print("a_startswith:", a_pakage[:2] == "he")
 print("a_endswith:", a.endswith("d!"))
-# print("a_endswith:", a[-2:] == ("d!"))
+# print("a_endswith:", a_pakage[-2:] == ("d!"))
 
 name = "홍길동"
 print("성씨가 김이박입니까?", name[:1] == "김" or name[:1] == "이" or name[:1] == "박")
