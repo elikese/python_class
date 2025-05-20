@@ -2,7 +2,7 @@ class Map:
     def __init__(self, size, goal, obstacles):
         self.size = size
         self.goal = goal
-        self.obstacles = set(obstacles)
+        self.obstacles = obstacles
 
     def display(self, player_pos):
         for y in range(self.size):
