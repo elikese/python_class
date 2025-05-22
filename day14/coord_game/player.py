@@ -1,17 +1,15 @@
 class Player:
-    def __init__(self, start_pos):
-        self.position = start_pos
+    def __init__(self, **options):
+        self.position = options.get("start_position")
 
-    def move(self, direction):
+    def move(self, move_input):
         x, y = self.position
-        if direction == "w":
+        if move_input == "w":
             return (x, y - 1)
-        elif direction == "s":
+        elif move_input == "s":
             return (x, y + 1)
-        elif direction == "a":
+        elif move_input == "a":
             return (x - 1, y)
-        elif direction == "d":
+        elif move_input == "d":
             return (x + 1, y)
-        elif direction == "q":
-            exit("게임 종료")
         return None

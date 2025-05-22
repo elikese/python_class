@@ -5,10 +5,18 @@
 
 # 예외 처리 문법
 """
+-----------필수--------------
 try:
     예외가 날 수 있는 코드
 except (예외종류1, 예외종류2...):
     예외 발생 시 실행할 코드
+-----------필수--------------
+-----------선택--------------
+else:
+    예외 없이 성공했을때 실행
+finally:
+    예외 여부랑 상관없이 마지막에 실행되는 코드
+-----------선택--------------
 """
 
 # 빨간줄 : SyntaxError
@@ -109,3 +117,26 @@ except ValueError as e:
 except ZeroDivisionError as e:
     print("0으로 나눌 수 없습니다.")
     print("에러로그:", e)
+
+# else : 예외 없이 성공했을때 (except에 안걸렸을때 실행되는 코드블럭)
+
+try:
+    num = "10살"
+    age = int(num)  # 여기서 ValueError 발생 가능
+except ValueError as e:  # 실행될 것
+    print("숫자가 아닙니다!")
+    print("에러로그:", e)
+else:
+    if age >= 20:  # else없이는 age가 아예 생성이 안됨 -> NameError발생!
+        print("성인입니다.")
+    else:
+        print("미성년자입니다.")
+
+
+# finally: 예외가 있건 없건 무조건 실행되는 코드블럭
+try:
+    print("1 / 0 =", 1 / 0)
+except ZeroDivisionError:
+    print("0으로 나눌 수 없습니다.")
+finally:
+    print("except에 잡혀도 안잡혀도 여긴 실행됩니다!")  # 무조건 실행됨
