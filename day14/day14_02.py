@@ -64,9 +64,6 @@ class ShortPasswordError(Exception):
         )
         super().__init__(self.message)
 
-    def __str__(self):
-        return self.message
-
 
 password = input("비밀번호를 입력하세요 >>")
 
@@ -76,3 +73,26 @@ try:
 
 except ShortPasswordError as e:
     print(e)
+
+# 실습2) 이메일 주소 검증
+# 사용자에게 이메일 주소를 입력받고, @가 없거나 .com이 포함되지 않으면 InvalidEmailError 예외를 발생시킴.
+# in연산자 써서 @검사, 문자열의 endswith써서 .com으로 끝나는지 검사
+# 검사 통과 x -> InvalidEmailError를 발생 -> except로 잡아서 에러메세지 출력
+# 검사 통과 o -> 올바른 출력입니다: 이메일 주소 출력
+
+
+class InvalidEmailError(Exception):
+    def __init__(self, email):
+        self.message = f"유효하지 않은 이메일 형식입니다: {email}"
+        super().__init__(self.message)
+
+
+email = input("이메일 주소를 입력하세요 >>")
+
+try:
+    if "@" not in email or not email.endswith(".com"):
+        raise InvalidEmailError(email)
+except InvalidEmailError as e:
+    print(e)
+else:
+    print(f"올바른 이메일 입니다: {email}")
