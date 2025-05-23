@@ -39,31 +39,40 @@ grades = ["5학년", "6학년"]
 classes = ["A반", "B반"]
 print([f"{grade}-{classe}" for grade in grades for classe in classes])
 
-matrix = [[1, 2, 3], [4, 5, 6]]
 
+# 실습) 리스트 컴프리헨션으로 영화관 좌석을
+# 리스트로 만들어 주세요
+# 결과물 -> ["A1","A2","A3"..,"B1",....."E5"]
+rows = ["A", "B", "C", "D", "E"]
+cols = [1, 2, 3, 4, 5]
+seats = [f"{row}{col}" for row in rows for col in cols]
+print(seats)
+
+# 평탄화
+matrix = [[1, 2, 3], [4, 5, 6]]
 flat = [num for row in matrix for num in row]
 print(flat)
 
 
 # 비밀번호 8자 이상, 숫자가 포함
-# password = input("비밀번호 입력하세요 >>")
-# if len(password) < 8:
-#     # 8자 이하입니다 에러 발생
-#     pass
-#
-# is_include_number = False
-# for char in password:
-#     if char.isdecimal():
-#         is_include_number = True
-#
-# if not is_include_number:
-#     # 숫자가 포함되어야 합니다 에러 발생
-#     pass
-#
-# # 하나라도 true면 true!
-# if not any([char.isdecimal() for char in password]):
-#     # 숫자가 포함되어야 합니다 에러 발생
-#     pass
+password = input("비밀번호 입력하세요 >>")
+if len(password) < 8:
+    # 8자 이하입니다 에러 발생
+    pass
+
+is_include_number = False
+for char in password:
+    if char.isdecimal():
+        is_include_number = True
+
+if not is_include_number:
+    # 숫자가 포함되어야 합니다 에러 발생
+    pass
+
+# 하나라도 true면 true!
+if not any([char.isdecimal() for char in password]):
+    # 숫자가 포함되어야 합니다 에러 발생
+    pass
 
 # enumerate
 names = ["홍길동", "김길동", "박길동"]
