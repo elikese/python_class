@@ -6,6 +6,20 @@ root.title("연습")  # 창 이름(타이틀)
 root.geometry("300x400")  # 창크기 (가로x세로)
 root.resizable(False, False)  # 창 크기 조절가능 여부(가로, 세로)
 
+# pack, place, grid
+# 1. pack
+# 알아서 위에서 아래로, 좌에서 우로, 아래에서 위로... 적재
+# 간단하게 배치할때는 좋음. 세밀한 위치 조정 x
+
+# 2. place
+# 절대좌표로 정확한 위치에 배치(픽셀 단위로)
+# 위젯이 많아지면 복잡하다.
+
+# 3. grid
+# 엑셀같은 표와 같은 형식
+# 격자 구조로 배치
+# 깔끔하고, 복잡해도 깔끔하게 정리가능
+
 # grid
 # Button(button_frame, text="1", height=5, width=8).grid(row=0, column=0)
 # Button(button_frame, text="2", height=5, width=8).grid(row=0, column=1)

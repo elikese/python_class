@@ -9,6 +9,9 @@ root.resizable(False, False)  # 창 크기 조절가능 여부(가로, 세로)
 frame1 = Frame(root, width=150, height=100, bg="skyblue")
 frame1.pack()
 frame1.pack_propagate(False)
+# frame은 랩핑처럼 자동으로 안에 있는 위젯크기에 맞춰짐
+# 안에 있는 위젯이 너무 작으면, width, height이 무시됨
+# 그걸 방지하는 메서드입니다
 
 Button(frame1, text="버튼1").pack()
 Button(frame1, text="버튼2").pack()
