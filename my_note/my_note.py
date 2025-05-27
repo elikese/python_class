@@ -7,11 +7,11 @@ root.title("my note")
 root.geometry("720x360")
 root.resizable(False, False)
 
-left_frame = Frame(root, width=360, height=360)
+left_frame = Frame(root, width=360, height=360, bg="black")
 left_frame.propagate(False)
 left_frame.pack(side="left")
 
-right_frame = Frame(root, width=360, height=360)
+right_frame = Frame(root, width=360, height=360, bg="red")
 right_frame.propagate(False)
 right_frame.pack(side="left")
 

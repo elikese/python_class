@@ -3,7 +3,7 @@ from tkinter import *
 # 창 만들기
 root = Tk()  # 창 생성(클래스)
 root.title("연습")  # 창 이름(타이틀)
-root.geometry("300x400")  # 창크기 (가로x세로)
+root.geometry("320x320")  # 창크기 (가로x세로)
 root.resizable(False, False)  # 창 크기 조절가능 여부(가로, 세로)
 
 # selectmode = SINGLE:하나만선택가능, EXTENDED:여러개선택가능
@@ -12,8 +12,11 @@ listbox = Listbox(root, selectmode=EXTENDED, height=3)
 # height가 0이 아니면 지정한 숫자만큼만 보여 줌
 listbox.insert(0, "사과")
 listbox.insert(1, "딸기")
-listbox.insert(2, "바나나")
 listbox.insert(END, "수박", "포도")  # END: 제일 마지막index, *arg매개변수
+fruits = ["바나나", "체리"]
+listbox.insert(END, *fruits)
+
+
 listbox.pack()
 
 
@@ -38,6 +41,7 @@ def seek():
 # [0, 1, 2, 3, 4] 2,3번 삭제
 # [0, 1, 3] 낮은 index 순으로 삭제할 경우
 # [0, 1, 4] 높은 index 순으로 삭제할 경우 -> 의도한 것
+# listbox.delete(index) -> 해당 인덱스 자료 삭제
 def delete():
     select_indices = listbox.curselection()
     # sorted(select_indices, reverse=True) -> 새 배열을 리턴, 원본을 바꾸는게 아니에요
@@ -45,13 +49,8 @@ def delete():
         listbox.delete(index)
 
 
-btn1 = Button(root, text="클릭", command=click)
-btn1.pack()
-
-btn2 = Button(root, text="확인", command=seek)
-btn2.pack()
-
-btn3 = Button(root, text="삭제", command=delete)
-btn3.pack()
+Button(root, text="클릭", command=click).pack()
+Button(root, text="확인", command=seek).pack()
+Button(root, text="삭제", command=delete).pack()
 
 root.mainloop()

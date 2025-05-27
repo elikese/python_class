@@ -3,8 +3,13 @@ from tkinter import *
 # 창 만들기
 root = Tk()  # 창 생성(클래스)
 root.title("연습")  # 창 이름(타이틀)
-root.geometry("300x400")  # 창크기 (가로x세로)
+root.geometry("320x320")  # 창크기 (가로x세로)
 root.resizable(False, False)  # 창 크기 조절가능 여부(가로, 세로)
+
+# 리스트 박스
+# 여러개의 문자열을 한줄 씩 나열해서 보여주는 위젯
+# 여러개의 문자열 리스트로 관리
+
 
 # selectmode = SINGLE:하나만선택가능, EXTENDED:여러개선택가능
 listbox = Listbox(root, selectmode=EXTENDED, height=3)
@@ -14,6 +19,8 @@ listbox.insert(0, "사과")
 listbox.insert(1, "딸기")
 listbox.insert(2, "바나나")
 listbox.insert(END, "수박", "포도")  # END: 제일 마지막index, *arg매개변수
+fruits = ["파인애플", "체리"]
+listbox.insert(END, *fruits)
 listbox.pack()
 
 
@@ -29,15 +36,16 @@ def click():
 # 버튼을 눌렀을때 내가 선택한 항목들이 출력되게
 # 만들어 주세요
 def seek():
-    select_indices = listbox.curselection()
+    select_indices = listbox.curselection()  # index들을 가져옴
     print(select_indices)
     for index in select_indices:
-        print(listbox.get(index))
+        print(listbox.get(index))  # 리스트박스에서 내용을 꺼내올 수 있음
 
 
 # [0, 1, 2, 3, 4] 2,3번 삭제
 # [0, 1, 3] 낮은 index 순으로 삭제할 경우
 # [0, 1, 4] 높은 index 순으로 삭제할 경우 -> 의도한 것
+# reversed(반복자료형) -> 원본을 내림차순으로 정렬
 def delete():
     select_indices = listbox.curselection()
     # sorted(select_indices, reverse=True) -> 새 배열을 리턴, 원본을 바꾸는게 아니에요
