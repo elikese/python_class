@@ -1,25 +1,54 @@
 # 복습
 from tkinter import *
+import tkinter.messagebox as msgbox
 
 root = Tk()  # 새로운 창 생성
-root.geometry("320x320")  # 창 크기 설정
+root.geometry("640x320")  # 창 크기 설정
 root.title("연습")  # 창 이름 설정
-root.resizable(False, False)  # 사이즈 조절여부 설정
+# root.resizable(False, False)  # 사이즈 조절여부 설정
 
+###########################################################################
+# frame은 가상의 공간
+# 두개의 같은 size frame을 만들어서
+# 하나는 왼쪽, 하나는 오른쪽
+left_frame = Frame(root, width=320, height=320)
+left_frame.propagate(False)  # 위젯의 크기에 줄어들지 못하게 방지
+left_frame.pack(side=LEFT)
 
-title_label = Label(root, text="제목", font=("Arial", 18, "bold"))  # 글자표기
+right_frame = Frame(root, width=320, height=320)
+right_frame.propagate(False)
+right_frame.pack(side=LEFT)
+###########################################################################
+
+title_label = Label(left_frame, text="제목", font=("Arial", 18, "bold"))  # 글자표기
 title_label.pack(pady=5)
-title_entry = Entry(root, width=30)  # 한줄 입력
+title_entry = Entry(left_frame, width=30)  # 한줄 입력
 title_entry.pack(pady=5)
 # title_entry.get() # 전체 문자열 가져옴
 # title_entry.delete(0, END) # 전체삭제
 
-content_label = Label(root, text="아래에 내용을 입력하세요")  # 글자표기
+content_label = Label(left_frame, text="아래에 내용을 입력하세요")  # 글자표기
 content_label.pack(pady=5)
-content_text = Text(root, width=30, height=8)
+content_text = Text(left_frame, width=30, height=8)
 content_text.pack(pady=5)
 # content_text.get("1.0", END) # 전체 문자열 가져옴
 # content_text.delete("1.0", END) # 전체삭제
+
+###########################################################################
+listbox_label = Label(right_frame, text="글 목록", font=("Arial", 18, "bold"))
+listbox_label.pack(pady=5)
+listbox = Listbox(right_frame, width=30, height=10, selectmode=SINGLE)
+listbox.pack(pady=5)
+
+
+def print_listbox():
+    if not os.path.exists("./writing.json"):
+        return  # 파일이 없으면 아무 것도 안 함
+
+    listbox.delete(0, END)  # 싹 다 지우고
+    writing_list = load_writing_json()
+    for dict_data in writing_list:
+        listbox.insert(END, dict_data.get("title"))
 
 
 def button_click():
@@ -28,7 +57,6 @@ def button_click():
     content = content_text.get("1.0", END).strip()
     # Text는 줄 단위로 관리되기 때문에 항상 마지막에 개행(\n)이 붙어 있음
     print(f"제목: {title}, 내용: {content}")
-    pass
 
 
 # 1. 쓴 글을 dict로 포장해서 JSON으로 만든 후 저장
@@ -43,33 +71,62 @@ def load_writing_json():
 
 
 def save_click():
-    # 해당 경로에 있는지 없는지 검사
-    # 없다면 빈 리스트 JSON file 생성
-    if not os.path.exists("./writing.json"):
-        with open("./writing.json", "w", encoding="utf-8") as f:
-            json.dump([], f)
+    ###########################################################################
+    response = msgbox.askokcancel("저장", "저장 하시겠습니까?")
+    ###########################################################################
+    if response:
+        # 해당 경로에 있는지 없는지 검사
+        # 없다면 빈 리스트 JSON file 생성
+        if not os.path.exists("./writing.json"):
+            with open("./writing.json", "w", encoding="utf-8") as f:
+                json.dump([], f)
 
-    writing_list = load_writing_json()
+        writing_list = load_writing_json()
+
+        with open("./writing.json", "w", encoding="utf-8") as f:
+            title = title_entry.get()
+            content = content_text.get("1.0", END).strip()
+            dict_date = {
+                "title": title,
+                "content": content,
+            }
+            writing_list.append(dict_date)
+            json.dump(writing_list, f, ensure_ascii=False, indent=4)
+
+        title_entry.delete(0, END)
+        content_text.delete("1.0", END)
+        print_listbox()
+
+
+# 1. listbox에서 선택된 index 리턴받기
+# 2. file에 있는 list 가져와서 해당 index 삭제
+# 3. 다시 JSON으로 write
+
+
+# 실습) askyesno msgbox로
+# "{title} 삭제하시겠습니까?"
+# 예를 선택할때 삭제되게
+def delete_click():
+    index_tuple = listbox.curselection()  # index 리턴 -> (0,) 튜플 형태
+
+    writing_list = load_writing_json()  # file 불러오기
+    data = writing_list.pop(index_tuple[0])  # 해당 index 삭제
 
     with open("./writing.json", "w", encoding="utf-8") as f:
-        title = title_entry.get()
-        content = content_text.get("1.0", END).strip()
-        dict_date = {
-            "title": title,
-            "content": content,
-        }
-        writing_list.append(dict_date)
         json.dump(writing_list, f, ensure_ascii=False, indent=4)
 
-    title_entry.delete(0, END)
-    content_text.delete("1.0", END)
+    print_listbox()
 
 
-button = Button(root, text="확인", width=30, command=button_click)  # 버튼 생성
+button = Button(left_frame, text="확인", width=30, command=button_click)  # 버튼 생성
 # command -> 클릭됬을 때 호출할 함수
 button.pack(pady=5)
 
-save_button = Button(root, text="저장", width=30, command=save_click)
+save_button = Button(left_frame, text="저장", width=30, command=save_click)
 save_button.pack(pady=5)
 
+delete_button = Button(right_frame, text="선택 삭제", width=30, command=delete_click)
+delete_button.pack(pady=5)
+
+print_listbox()
 root.mainloop()  # 실행
