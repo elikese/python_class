@@ -38,7 +38,7 @@ content_text.pack(pady=5)
 listbox_label = Label(right_frame, text="글 목록", font=("Arial", 18, "bold"))
 listbox_label.pack(pady=5)
 listbox = Listbox(right_frame, width=30, height=10, selectmode=SINGLE)
-listbox.pack(pady=5)
+listbox.pack(pady=6)
 
 
 def print_listbox():
@@ -122,6 +122,10 @@ def delete_click():
         print_listbox()
 
 
+def update_click():
+    pass
+
+
 button = Button(left_frame, text="확인", width=30, command=button_click)  # 버튼 생성
 # command -> 클릭됬을 때 호출할 함수
 button.pack(pady=5)
@@ -131,6 +135,9 @@ save_button.pack(pady=5)
 
 delete_button = Button(right_frame, text="선택 삭제", width=30, command=delete_click)
 delete_button.pack(pady=5)
+
+update_button = Button(right_frame, text="선택 수정", width=30, command=update_click)
+update_button.pack(pady=5)
 
 print_listbox()
 root.mainloop()  # 실행
