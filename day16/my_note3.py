@@ -122,8 +122,22 @@ def delete_click():
         print_listbox()
 
 
-def update_click():
-    pass
+def load_click():
+    index_tuple = listbox.curselection()
+    if not index_tuple:
+        msgbox.showwarning("경고", "목록에서 항목을 선택하세요.")
+        return
+
+    index = index_tuple[0]
+    writing_list = load_writing_json()
+
+    selected_data = writing_list[index]
+
+    title_entry.delete(0, END)
+    content_text.delete("1.0", END)
+
+    title_entry.insert(0, selected_data["title"])
+    content_text.insert("1.0", selected_data["content"])
 
 
 button = Button(left_frame, text="확인", width=30, command=button_click)  # 버튼 생성
@@ -133,11 +147,12 @@ button.pack(pady=5)
 save_button = Button(left_frame, text="저장", width=30, command=save_click)
 save_button.pack(pady=5)
 
+update_button = Button(right_frame, text="선택 불러오기", width=30, command=load_click)
+update_button.pack(pady=5)
+
 delete_button = Button(right_frame, text="선택 삭제", width=30, command=delete_click)
 delete_button.pack(pady=5)
 
-update_button = Button(right_frame, text="선택 수정", width=30, command=update_click)
-update_button.pack(pady=5)
 
 print_listbox()
 root.mainloop()  # 실행
