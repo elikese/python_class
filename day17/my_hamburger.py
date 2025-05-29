@@ -24,7 +24,8 @@ def burger_click():
         return
 
     price = hamburgers.get(burger_name)
-    cart.insert(END, f"{burger_name} - {price}원")
+    # cart.insert(END, f"{burger_name} - {price}원")
+    # 갯수만 늘어나게 바꿔야함
 
     # 총 갯수를 구해줘야 함
     # dict - key, value
@@ -33,6 +34,7 @@ def burger_click():
         cart_data[burger_name]["quantity"] += 1
     else:
         cart_data[burger_name] = {"price": price, "quantity": 1}
+    refresh_cart_view()
 
 
 def drink_click():
@@ -41,12 +43,37 @@ def drink_click():
         return
 
     price = drinks.get(drink_name)
-    cart.insert(END, f"{drink_name} - {price}원")
-
     if drink_name in cart_data:
         cart_data[drink_name]["quantity"] += 1
     else:
         cart_data[drink_name] = {"price": price, "quantity": 1}
+    refresh_cart_view()
+
+
+def refresh_cart_view():
+    cart.delete(0, END)
+    for name, data in cart_data.items():
+        total_price = data["price"] * data["quantity"]
+        cart.insert(END, f"{name} - {data['quantity']}개 - {total_price}원")
+
+
+def delete_click():
+    index_tuple = cart.curselection()
+    if not index_tuple:
+        return
+
+    index = index_tuple[0]
+    selected_text = cart.get(index).strip()  # "~버거 - ~개 - ~원"
+    item_name = selected_text.split(" - ")[0]  # "~버거"
+
+    # 삭제
+    cart_data.pop(item_name)
+
+    refresh_cart_view()
+
+
+def order_click():
+    pass
 
 
 title_label = Label(root, text="🍔햄버거 주문🍔", font=("Arial", 16, "bold"))
@@ -90,6 +117,6 @@ cart_label.pack(pady=5)
 cart = Listbox(root, width=30, height=8, selectmode=SINGLE)
 cart.pack(pady=6)
 
-Button(root, text="선택 삭제", width=30).pack(pady=5)
-Button(root, text="주문하기", width=30).pack(pady=5)
+Button(root, text="선택 삭제", width=30, command=delete_click).pack(pady=5)
+Button(root, text="주문 하기", width=30, command=order_click).pack(pady=5)
 root.mainloop()
