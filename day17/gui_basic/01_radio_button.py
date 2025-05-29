@@ -29,6 +29,8 @@ for food_option in food_menu_options:
 label1 = Label(root, text="음료를 선택하세요")
 label1.pack()
 
+# 음료 라디오 버튼!
+# 콜라, 사이다, 맥주
 radio_variable2 = StringVar()  # variable을 공유 -> 하나의 상태로 관리되어짐
 radio_variable2.set(None)
 radio_button4 = Radiobutton(root, text="콜라", value="콜라", variable=radio_variable2)

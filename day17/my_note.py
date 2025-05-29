@@ -194,7 +194,6 @@ def load_click():
 ########################################################
 
 update_button = Button(left_frame, text="수정", width=30, command=update_click, state="disabled")  # 버튼 생성
-# command -> 클릭됬을 때 호출할 함수
 update_button.pack(pady=5)
 
 save_button = Button(left_frame, text="저장", width=30, command=save_click)
