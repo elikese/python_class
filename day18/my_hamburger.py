@@ -124,7 +124,7 @@ Button(drink_frame, text="담기", width=30, command=drink_click).grid(row=len(d
 
 cart_label = Label(root, text="장바구니", font=("Arial", 18, "bold"))
 cart_label.pack(pady=5)
-cart = Listbox(root, width=30, height=8, selectmode=SINGLE)
+cart = Listbox(root, width=30, height=8, selectmode=SINGLE, font=("Courier New", 10))
 cart.pack(pady=6)
 
 Button(root, text="선택 삭제", width=30, command=delete_click).pack(pady=5)
