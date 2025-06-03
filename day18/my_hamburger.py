@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
+from datetime import datetime
+import os
 
 root = Tk()
 root.geometry("320x640")
@@ -88,12 +90,44 @@ def order_click():
     order_text += f"\n총 금액: {total_amount}원"
 
     # 주문 확인 메시지박스
-    result = messagebox.askyesno("주문 확인", order_text + "\n\n주문하시겠습니까?")
+    result = messagebox.askyesno("주문 확인", order_text + "\n주문하시겠습니까?")
 
     if result:  # 예를 눌렀을 때
+        save_order_log(order_text, total_amount)
         cart_data.clear()  # 장바구니 비우기
         refresh_cart_view()  # 화면 업데이트
         messagebox.showinfo("주문 완료", "주문이 완료되었습니다!")
+
+
+def save_order_log(order_text, total_amount):
+    """주문 내역을 텍스트 파일로 저장"""
+    try:
+        # 현재 날짜와 시간 가져오기
+        now = datetime.now()
+        timestamp = now.strftime("%Y-%m-%d %H:%M:%S")
+
+        # 로그 파일명 (order_log.txt)
+        log_filename = "order_log.txt"
+
+        # 주문 로그 내용 작성
+        log_content = f"""\
+{'='*50}
+주문 시간: {timestamp}
+{'='*50}
+{order_text}
+총 금액: {total_amount}원
+{'='*50}
+"""
+
+        # 파일에 추가 모드로 저장 (기존 로그 유지)
+        with open(log_filename, "a", encoding="utf-8") as f:
+            f.write(log_content)
+
+        print(f"주문 로그가 {log_filename}에 저장되었습니다.")
+
+    except Exception as e:
+        print(f"로그 저장 중 오류 발생: {e}")
+        messagebox.showerror("오류", f"로그 저장 실패: {e}")
 
 
 ###################################################################################
