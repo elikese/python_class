@@ -16,7 +16,7 @@ def crawl_multiple_pages(num):
         quotes = soup.find_all("div", class_="quote")
 
         for quote in quotes:
-            data = {"text": quote.find("span", class_="text").text, "author": quote.find("small", class_="author").text, "page": page}
+            data = {"text": quote.find("span", class_="text").get_text(), "author": quote.find("small", class_="author").get_text(), "page": page}
             all_data.append(data)
 
         time.sleep(0.5)  # 서버 부하 방지

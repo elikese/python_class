@@ -16,7 +16,9 @@ soup = BeautifulSoup(response.text, "html.parser")
 # 방법 1. 태그 이름으로 찾기 (find)
 print("=== 1. 태그로 찾기 ===")
 # <title> 태그는 페이지 제목을 담고 있음. 보통 브라우저 탭에 표시됨
-title = soup.find("title").text  # .text는 태그 안의 글자만 추출
+title_tag = soup.find("title")
+title = title_tag.get_text()
+# .text는 태그 안의 글자만 추출
 print(title)  # 예: Quotes to Scrape
 
 # 방법 2. 클래스 이름으로 찾기 (find_all)
