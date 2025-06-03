@@ -24,5 +24,6 @@ def crawl_multiple_pages(num):
     return all_data
 
 
-data = crawl_multiple_pages(3)
-print(f"총 {len(data)}개 데이터 수집 완료!")
+data_list = crawl_multiple_pages(3)
+print(data_list)
+print(f"총 {len(data_list)}개 데이터 수집 완료!")
