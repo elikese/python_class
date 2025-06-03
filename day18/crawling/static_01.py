@@ -25,10 +25,12 @@ quotes = soup.find_all("div", class_="quote")
 # 하나씩 꺼내면서 명언의 텍스트와 작가를 출력합니다.
 for quote in quotes:
     # <span class="text"> 안에 있는 실제 명언 텍스트를 가져옵니다.
-    text = quote.find("span", class_="text").text
+    span_text = quote.find("span", class_="text")
+    text = span_text.get_text()
 
     # <small class="author"> 안에 있는 작가 이름을 가져옵니다.
-    author = quote.find("small", class_="author").text
+    small_author = quote.find("small", class_="author")
+    author = small_author.get_text()
 
     # 명언과 작가를 보기 좋게 출력합니다.
     print(f'"{text}" - {author}')

@@ -63,3 +63,16 @@ class="quote": 이름표 같은 것. 여러 개 중에서 특정한 것만 고�
 홍길동 → <small class="author"> 안에 있음
 
 👉 그래서 Python 코드에서 find("span", class_="text") 이런 식으로 찾아가는 거야!
+
+
+# 부모에서 자식으로 탐색
+tr = soup.find("tr", class_="baseList")
+td = tr.find("td")  # tr의 자식 중에서
+a = td.find("a")    # td의 자식 중에서
+
+# 한 번에 깊은 곳까지
+a = tr.find("a", class_="baseList-title")  # tr 안 어디든지
+
+# 형제 관계
+em = a.find("em")
+next_sibling = em.next_sibling  # em 다음 형제

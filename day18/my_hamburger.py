@@ -68,7 +68,6 @@ def delete_click():
 
     # 삭제
     cart_data.pop(item_name)
-
     refresh_cart_view()
 
 

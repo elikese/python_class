@@ -42,6 +42,6 @@ print("\n=== 4. 속성으로 찾기 ===")
 # <a href="..."> 태그들을 모두 찾기
 # href=True는 href 속성이 있는 <a> 태그만 찾겠다는 뜻
 links = soup.find_all("a", href=True)
-
+print(links)
 # 전체 링크 개수 출력
 print(f"링크 개수: {len(links)}")  # 예: 10~20개
