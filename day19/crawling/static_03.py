@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import time
 
 # 기본 설정
 url = "https://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu&page=1&divpage=101"
