@@ -13,4 +13,6 @@ pyinstaller --onefile --windowed hamburger_app.py
 --windowed: 콘솔 창 없이 GUI만 표시
 dist 폴더에서 생성된 exe 파일 확인
 
+pip install requests
+pip install openpyxl
 pip install beautifulsoup4

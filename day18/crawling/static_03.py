@@ -2,28 +2,84 @@ import requests
 from bs4 import BeautifulSoup
 import time
 
+# 기본 설정
+url = "https://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu&page=1&divpage=101"
+headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 
-def crawl_multiple_pages(num):
-    all_data = []
+print("뽐뿌 크롤링 시작...")
 
-    for page in range(1, num + 1):  # 1~3페이지
-        url = f"http://quotes.toscrape.com/page/{page}/"
-        print(f"크롤링 중: 페이지 {page}")
+# 웹페이지 요청
+response = requests.get(url, headers=headers)
+print(f"응답 상태코드: {response.status_code}")
 
-        response = requests.get(url)
-        soup = BeautifulSoup(response.text, "html.parser")
+# HTML 파싱
+soup = BeautifulSoup(response.text, "html.parser")
 
-        quotes = soup.find_all("div", class_="quote")
+# 게시글 목록 찾기
+post_rows = soup.find_all("tr", class_="baseList")
+print(f"찾은 게시글 수: {len(post_rows)}개")
 
-        for quote in quotes:
-            data = {"text": quote.find("span", class_="text").get_text(), "author": quote.find("small", class_="author").get_text(), "page": page}
-            all_data.append(data)
+# 데이터 저장할 리스트
+post_list = []
 
-        time.sleep(0.5)  # 서버 부하 방지
+# 각 게시글 정보 추출
+for i, row in enumerate(post_rows[:21]):
+    print(f"--- {i+1}번째 게시글 처리 중 ---")
 
-    return all_data
+    # 썸네일 이미지 추출
+    img = row.find("img")
+    if img:
+        img_url = img.get("src")
+        print("이미지: https:" + f"{img_url}")
+    else:
+        img_url = None
+        print("이미지: 없음")
 
+    # 제목, 링크 추출
+    title_link = row.find("a", class_="baseList-title")
+    if title_link:
+        title = title_link.get_text(strip=True)
+        link_url = title_link.get("href")
+        print(f"제목: {title}")
+        print("링크: https://www.ppomppu.co.kr/zboard/" + f"{link_url}")
+    else:
+        print("제목을 찾을 수 없음")
+        continue
 
-data_list = crawl_multiple_pages(3)
-print(data_list)
-print(f"총 {len(data_list)}개 데이터 수집 완료!")
+    # 작성자 추출
+    author_element = row.find("span", class_="baseList-name")
+    if author_element:
+        author = author_element.get_text(strip=True)
+        print(f"작성자: {author}")
+    else:
+        author = "익명"
+        print("작성자: 익명")
+
+    # 시간 추출
+    time_element = row.find("time", class_="baseList-time")
+    if time_element:
+        post_time = time_element.get_text(strip=True)
+        print(f"시간: {post_time}")
+    else:
+        post_time = ""
+        print("시간: 정보없음")
+
+    # 데이터 딕셔너리 생성
+    post_data = {
+        "title": title,
+        "author": author,
+        "time": post_time,
+        "image_url": "https:" + img_url,
+        "link_url": "https://www.ppomppu.co.kr/zboard/" + link_url,
+    }
+
+    # 리스트에 추가
+    post_list.append(post_data)
+
+# 결과 출력
+print(f"\n" + "=" * 50)
+print(f"크롤링 완료! 총 {len(post_list)}개 게시글 수집")
+print("=" * 50)
+
+print(f"\n전체 데이터:")
+print(post_list)
