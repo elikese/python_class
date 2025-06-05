@@ -1,4 +1,3 @@
-# 📦 requests와 BeautifulSoup 라이브러리를 불러옵니다.
 # requests: 웹사이트에 접속해서 HTML 데이터를 가져올 수 있게 해주는 도구
 # BeautifulSoup: 가져온 HTML 데이터를 정리해주는 라이브러리(파서)
 import requests
@@ -17,7 +16,7 @@ soup = BeautifulSoup(response.text, "html.parser")
 # 1. find() 연습 - 첫 번째 요소만 가져오기
 # 페이지 제목 가져오기
 title = soup.find("title")
-print(f"페이지 제목: {title.text}")
+print(f"페이지 제목: {title.get_text()}")
 
 # 첫 번째 명언 div 가져오기
 first_quote = soup.find("div", class_="quote")
@@ -75,7 +74,7 @@ for author in authors_by_css[:3]:  # 처음 3개만
 top_tags = soup.select(".tags-box .tag")  # .tags-box .tag-item .tag 안해도 됨. 깊이탐색이니까
 print(f"Top Ten 태그들")
 for i, tag in enumerate(top_tags):
-    print(f"{i+1}위 : {tag.text}")
+    print(f"{i+1}위 : {tag.get_text()}")
 
 print("=" * 60)
 
@@ -89,8 +88,8 @@ for quote in all_quotes:
     tags = quote.find_all("a", class_="tag")
     tag_texts = [tag.text for tag in tags]
     if "inspirational" in tag_texts:
-        text = quote.find("span", class_="text").text
-        author = quote.find("small", class_="author").text
+        text = quote.find("span", class_="text").get_text()
+        author = quote.find("small", class_="author").get_text()
         inspirational_quotes.append((author, text))
 
 print(f"\n'inspirational' 태그가 있는 명언 ({len(inspirational_quotes)}개):")
@@ -100,9 +99,9 @@ for author, text in inspirational_quotes:
 # Albert Einstein의 명언만 찾기(실습)
 einstein_quotes = []
 for quote in all_quotes:
-    author = quote.find("small", class_="author").text
+    author = quote.find("small", class_="author").get_text()
     if author == "Albert Einstein":
-        text = quote.find("span", class_="text").text
+        text = quote.find("span", class_="text").get_text()
         einstein_quotes.append(text)
 
 print(f"Albert Einstein의 명언 ({len(einstein_quotes)}개):")
@@ -128,18 +127,22 @@ def extract_all_quotes(soup):
     quotes = soup.find_all("div", class_="quote")
     for quote in quotes:
         # 텍스트 추출
-        text = quote.find("span", class_="text").text.strip('"')
+        text = quote.find("span", class_="text").get_text().strip()
 
         # 작가 추출
-        author = quote.find("small", class_="author").text
+        author = quote.find("small", class_="author").get_text()
 
         # 작가 정보 페이지 링크 추출
-        author_link = quote.find("a")["href"] if quote.find("a") else None
+        author_link = quote.find("a").get("href") if quote.find("a") else None
 
         # 태그들 추출
-        tags = [tag.text for tag in quote.find_all("a", class_="tag")]
+        tags = []
+        for tag in quote.find_all("a", class_="tag"):
+            tags.append(tag.get_text())
 
-        quote_data = {"text": text, "author": author, "author_link": author_link, "tags": tags, "tag_count": len(tags)}
+        # tags = [tag.text for tag in quote.find_all("a", class_="tag")]
+
+        quote_data = {"text": text, "author": author, "author_link": author_link, "tags": ", ".join(tags), "tag_count": len(tags)}
         quotes_data.append(quote_data)
 
     return quotes_data
@@ -151,19 +154,13 @@ quotes_data = extract_all_quotes(soup)
 print("추출된 명언 데이터 샘플:")
 for i, quote in enumerate(quotes_data[:2], 1):
     print(f"\n{i}번째 명언:")
-    print(f"  텍스트: {quote['text'][:60]}...")
-    print(f"  작가: {quote['author']}")
-    print(f"  링크: {quote['author_link']}")
-    print(f"  태그: {', '.join(quote['tags'])}")
-    print(f"  태그 개수: {quote['tag_count']}")
+    print(f"텍스트: {quote.get('text')[:60]}...")
+    print(f"작가: {quote.get('author')}")
+    print(f"링크: {quote.get('author_link')}")
+    print(f"태그: {quote.get('tags')}")
+    print(f"태그 개수: {quote.get('tag_count')}")
 
-# 통계 정보
-print(f"\n전체 통계:")
-print(f"- 총 명언 수: {len(quotes_data)}")
-print(f"- 평균 태그 수: {sum(q['tag_count'] for q in quotes_data) / len(quotes_data):.1f}")
-print(f"- 가장 많은 태그를 가진 명언: {max(quotes_data, key=lambda x: x['tag_count'])['tag_count']}개")
-
-print("\n" + "=" * 60)
+print("=" * 60)
 
 # 6. select_one() vs find() 비교
 print("\n6. select_one() vs find() 비교")
@@ -181,8 +178,6 @@ first_author_select = first_quote_select.select_one(".author").text
 
 print(f"find() 결과 - 제목: {title_find}")
 print(f"select_one() 결과 - 제목: {title_select}")
-print(f"결과 동일: {title_find == title_select}")
 
-print(f"\nfind() 결과 - 첫 번째 작가: {first_author_find}")
+print(f"find() 결과 - 첫 번째 작가: {first_author_find}")
 print(f"select_one() 결과 - 첫 번째 작가: {first_author_select}")
-print(f"결과 동일: {first_author_find == first_author_select}")
