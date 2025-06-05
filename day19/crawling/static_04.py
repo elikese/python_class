@@ -9,12 +9,11 @@ from openpyxl.styles import Font, Alignment, PatternFill
 def crawl_ppomppu_page(page_num):
     # 기본 설정
     url = f"https://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu&page={page_num}&divpage=101"
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 
     print(f"뽐뿌 {page_num}페이지 크롤링 시작...")
 
     # 웹페이지 요청
-    response = requests.get(url, headers=headers)
+    response = requests.get(url)
     print(f"응답 상태코드: {response.status_code}")
 
     # HTML 파싱

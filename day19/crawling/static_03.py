@@ -4,12 +4,12 @@ import time
 
 # 기본 설정
 url = "https://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu&page=1&divpage=101"
-headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 
 print("뽐뿌 크롤링 시작...")
 
 # 웹페이지 요청
-response = requests.get(url, headers=headers)
+response = requests.get(url)
+# 200: 성공, 404:찾을수 없음, 401: 권한부족, 500: 서버에러
 print(f"응답 상태코드: {response.status_code}")
 
 # HTML 파싱
