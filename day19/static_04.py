@@ -112,16 +112,16 @@ def save_to_excel(data, filename):
 
     # 새 워크북 생성
     wb = Workbook()
-    ws = wb.active
-    ws.title = "뽐뿌 게시글"
+    ws = wb.active  # 기본 워크시트 활성화(선택)
+    ws.title = "뽐뿌 게시글"  # 시트 이름 변경
 
     # 헤더 설정
     headers = ["번호", "제목", "작성자", "시간", "이미지URL", "링크URL"]
 
     # 헤더 스타일 설정
-    header_font = Font(bold=True, color="FFFFFF")
-    header_fill = PatternFill(start_color="366092", end_color="366092", fill_type="solid")
-    header_alignment = Alignment(horizontal="center", vertical="center")
+    header_font = Font(bold=True, color="FFFFFF")  # 폰트 색
+    header_fill = PatternFill(start_color="366092", end_color="366092", fill_type="solid")  # 색깔
+    header_alignment = Alignment(horizontal="center", vertical="center")  # 가운데 정렬
 
     # 헤더 추가
     for col_idx, header in enumerate(headers):
