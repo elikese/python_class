@@ -4,8 +4,13 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 
+# pip install selenium
+# pip install webdriver-manager
+# pip install openpyxl
+
 # 드라이버 설정 및 네이버 접속
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+chrome_service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=chrome_service)
 driver.get("https://naver.com")
 # driver.maximize_window()
 sleep(1)
@@ -33,28 +38,26 @@ sleep(1)
 # 첫 번째 웹툰 아이템 찾기
 webtoon_items = driver.find_elements(by=By.CSS_SELECTOR, value="#content > div:nth-child(1) > ul > li")  # 전체웹툰리스트
 first_webtoon = webtoon_items[0]  # 첫 번째 웹툰만
-print(f"첫 번째 웹툰을 크롤링합니다...")
-
-# 첫 번째 웹툰 정보 추출
+print(f"첫 웹툰 크롤링 시작")
 
 # 요소까지 스크롤
 driver.execute_script("arguments[0].scrollIntoView()", first_webtoon)
 sleep(1)
 
 # 이미지 URL 추출
-webtoon_img = first_webtoon.find_element(by=By.CSS_SELECTOR, value="a > div > img")
+webtoon_img = first_webtoon.find_element(by=By.CSS_SELECTOR, value=".Poster__image--d9XTI")
 img_url = webtoon_img.get_attribute("src")
 
 # 제목 추출
-webtoon_title = first_webtoon.find_element(by=By.CSS_SELECTOR, value="div > a:nth-of-type(1) > span")
+webtoon_title = first_webtoon.find_element(by=By.CSS_SELECTOR, value=".ContentTitle__title--e3qXt .text")
 title_text = webtoon_title.text
 
 # 작가 추출
-webtoon_author = first_webtoon.find_element(by=By.CSS_SELECTOR, value="div .ContentAuthor__author--CTAAP")
+webtoon_author = first_webtoon.find_element(by=By.CSS_SELECTOR, value=".ContentAuthor__author--CTAAP")
 author_text = webtoon_author.text
 
 # 평점 추출
-webtoon_rating = first_webtoon.find_element(by=By.CSS_SELECTOR, value="div > div:nth-last-of-type(1) > span > span")
+webtoon_rating = first_webtoon.find_element(by=By.CSS_SELECTOR, value=".Rating__star_area--dFzsb .text")
 rating_text = webtoon_rating.text
 
 print(
