@@ -9,7 +9,7 @@ name = "박화목"
 age = 33
 
 # 기본 자료형
-# int: 정수형 / float: 실수형 / str: 문자열 / bool: 불형(참,거짓)
+# int: 정수형 / float: 실수형 / str(string): 문자열 / bool: 불형(참,거짓)
 
 pi = 3.14
 isMale = True
@@ -35,10 +35,10 @@ print(name, age)
 print("이름:", name, "나이:", age)
 
 print("이름:" + name + "나이:" + age)
-print(type(age)) # str age = "33" // "33" != 33
+print(type(age))  # str age = "33" // "33" != 33
 
 
-# 자기소개
+# 실습)자기소개
 # 이름(name), 나이(age)를 input으로 변수에 담아
 # print()를 통해 "안녕하세요, 저는 박화목이고, 나이는 33살입니다." 출력
 # 띄어쓰기 주의!
@@ -56,7 +56,7 @@ print(num_sum)
 
 fnum = 1.1
 fnum2 = 0.1
-fnum_sum = 1.1 + 0.1 # 1.2
+fnum_sum = 1.1 + 0.1  # 1.2
 print(fnum_sum == 1.2)
 print(fnum_sum)
 
@@ -70,12 +70,10 @@ print(fnum_sum)
 => 실제의 값보다 아주 조금 더 큰 값이 나옴.
 """
 
-#극복
+# 극복
 print((fnum * 10 + fnum2 * 10) / 10)
 
 """
 참과 거짓의 변수는 is 또는 has 등 을 앞에 붙여주는게 좋음(부정문은 쓰지 않는다)
 ex) is_empty = True O is_not_empty = False X
 """
-
-

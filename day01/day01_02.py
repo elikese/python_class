@@ -15,9 +15,7 @@ print("안녕하세요, 저는 {}입니다.".format(full_name))
 age = 33
 
 print("안녕하세요, 저의 이름은{}이고, 나이는 {}살입니다.".format(full_name, age))
-print(
-    "안녕하세요, 저의 이름은{nm}이고, 나이는 {ag}살입니다.".format(nm=full_name, ag=age)
-)
+print("안녕하세요, 저의 이름은{nm}이고, 나이는 {ag}살입니다.".format(nm=full_name, ag=age))
 
 # fstring
 print(f"안녕하세요, 저의이름{full_name}이고, 나이는 {age}살 입니다.")
@@ -39,6 +37,7 @@ a = "Hello, world!"
 # len() 문자열 길이
 str_length = len(a)
 print(str_length)
+
 
 # slicing
 # a_pakage[시작번호:끝번호:스텝(간격)]
