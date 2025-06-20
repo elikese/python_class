@@ -67,3 +67,26 @@ print(숫자들)
 print(숫자들)
 숫자들.sort()  # 오름차순 정렬
 print(숫자들)
+
+#### 복습 예제 ####
+
+# 주문 금액 입력
+# 15000원 이상시 1000원할인 혹은 8퍼 할인
+price = int("15000")
+
+# 15000원 이상일 경우 할인 계산
+if price >= 15000:
+    discount_8_percent = price * 0.08
+    discount_1000 = 1000
+
+    # 더 큰 할인 선택
+    if discount_8_percent > discount_1000:
+        final_price = price - discount_8_percent
+    else:
+        final_price = price - discount_1000
+else:
+    # 15000원 미만은 할인 없음
+    final_price = price
+
+# 결과 출력
+print(int(final_price))
