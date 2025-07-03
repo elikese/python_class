@@ -38,7 +38,8 @@ for l_name in l_names:
     for f_name in f_names:
         full_name = l_name + f_name
         age = random.randint(8, 50)
-        civil_list.append(make_civil(full_name, age))
+        civil = make_civil(full_name, age)
+        civil_list.append(civil)
 
 print(civil_list)
 
