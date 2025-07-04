@@ -1,3 +1,8 @@
+# 피자 주문 시스템
+# *args 복습
+# 기본피자 + topping들 추가(여러개를 가변적으로)
+
+
 # 토핑 메뉴 정의
 topping_menu = {
     "페퍼로니": 500,
@@ -14,16 +19,16 @@ def validate_toppings(*toppings):
     for topping in toppings:
         if topping not in topping_menu:
             print(f"{topping}은 제공하지 않는 토핑입니다")
-            print(f"🍕 사용 가능한 토핑: {', '.join(topping_menu.keys())}")
+            print(f"🍕 사용 가능한 토핑: {list(topping_menu.keys())}")
             return False
     return True
 
 def calculate_topping_price(*toppings):
     """토핑들의 총 가격을 계산하는 함수"""
-    total_topping_price = 0
+    price_sum = 0
     for topping in toppings:
-        total_topping_price += topping_menu[topping]
-    return total_topping_price
+        price_sum += topping_menu[topping]
+    return price_sum
 
 def order_pizza(*toppings):
     """피자를 주문하는 함수"""
@@ -38,11 +43,11 @@ def order_pizza(*toppings):
     total_price = BASE_PRICE + topping_price
 
     # 주문 내역 출력
-    print(f"🍕 주문 내역:")
-    print(f"   기본 피자: {BASE_PRICE:,}원")
+    print(f"주문 내역:")
+    print(f"기본 피자: {BASE_PRICE}원")
     if toppings:
-        print(f"   토핑: {', '.join(toppings)} (+{topping_price:,}원)")
-    print(f"   총 가격: {total_price:,}원")
+        print(f"토핑: {toppings} (+{topping_price}원)")
+    print(f"총 가격: {total_price}원")
 
     return total_price
 

@@ -66,12 +66,50 @@ def print_report_card(student):
     grade = calculate_grade(average)
 
     # 성적표 출력
-    print(f"\n📋 {name}님의 성적표")
+    print(f"{name}님의 성적표")
     print("=" * 30)
     print(f"국어: {korean}점")
     print(f"영어: {english}점")
     print(f"수학: {math}점")
-    print("-" * 30)
     print(f"평균: {average}점")
     print(f"등급: {grade}등급")
     print("=" * 30)
+
+while True:
+    print("\n" + "=" * 40)
+    print("1. 학생 정보 입력")
+    print("2. 개별 성적표 출력")
+    print("3. 프로그램 종료")
+    print("=" * 40)
+
+    choice = input("선택하세요 (1-3): ")
+
+    if choice == "1":
+        # 학생 정보 입력받고 리스트에 추가
+        student = input_student_info()
+        students.append(student)
+        print(f"{student['name']}님이 등록되었습니다!")
+
+    elif choice == "2":
+        if not students:
+            print("등록된 학생이 없습니다.")
+        else:
+            print("\n등록된 학생들:")
+            for i, student in enumerate(students):
+                print(f"{i + 1}. {student['name']}")
+
+            try:
+                index = int(input("성적표를 볼 학생 번호: ")) - 1
+                if 0 <= index < len(students):
+                    print_report_card(students[index])
+                else:
+                    print("잘못된 번호입니다.")
+            except ValueError:
+                print("숫자를 입력해주세요.")
+
+    elif choice == "3":
+        print("👋 프로그램을 종료합니다.")
+        break
+
+    else:
+        print("❌ 잘못된 선택입니다. 1-3 사이의 숫자를 입력하세요.")
