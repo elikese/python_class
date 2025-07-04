@@ -22,6 +22,9 @@ def input_student_info():
     english = int(input("영어 점수: "))
     math = int(input("수학 점수: "))
 
+    if not validate_score(korean, english, math):
+        korean, english, math = -1, -1, -1
+
     # 학생 정보를 딕셔너리로 만들기
     student = {
         'name': name,
@@ -31,6 +34,13 @@ def input_student_info():
     }
 
     return student
+
+def validate_score(*scores):
+    for score in scores:
+        if score < 0 or score > 100:
+            return False
+
+    return True
 
 # 2단계: 평균 계산 함수
 def calculate_average(korean, english, math):
@@ -87,6 +97,11 @@ while True:
     if choice == "1":
         # 학생 정보 입력받고 리스트에 추가
         student = input_student_info()
+
+        if -1 in list(student.values()):
+            print("잘못된 점수 입력이 감지되었습니다. 다시 입력해주세요")
+            continue
+
         students.append(student)
         print(f"{student['name']}님이 등록되었습니다!")
 
@@ -98,18 +113,16 @@ while True:
             for i, student in enumerate(students):
                 print(f"{i + 1}. {student['name']}")
 
-            try:
-                index = int(input("성적표를 볼 학생 번호: ")) - 1
-                if 0 <= index < len(students):
-                    print_report_card(students[index])
-                else:
-                    print("잘못된 번호입니다.")
-            except ValueError:
-                print("숫자를 입력해주세요.")
+            picked_index = int(input("성적표를 볼 학생 번호: "))
+            index =  picked_index - 1
+            if 0 <= index < len(students):
+                print_report_card(students[index])
+            else:
+                print("잘못된 번호입니다.")
 
     elif choice == "3":
-        print("👋 프로그램을 종료합니다.")
+        print("프로그램을 종료합니다.")
         break
 
     else:
-        print("❌ 잘못된 선택입니다. 1-3 사이의 숫자를 입력하세요.")
+        print("잘못된 선택입니다. 1-3 사이의 숫자를 입력하세요.")
