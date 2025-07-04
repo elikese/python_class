@@ -57,67 +57,114 @@ print(minus_result)
 print(multiple_result)
 print(divide_result)
 
-# 이걸 도대체 왜 쓰느냐?
-# 확장 : 함수를 조합해서 비슷하지만 서로 다른 기능들을 확장
+# 왜 쓰느냐?
+# 확장성 : 함수를 조합해서 비슷하지만 서로 다른 기능들을 확장
+
 # 전략패턴 - 행동의 양상은 같은데, 행동의 디테일만 다른경우
 # python에서는 고차함수로 함수의 조합을 통해 구현할 수 있음
 
-# 문서 출력하고, 처리 끝나면 알려주세요(알려주는 방법이 여러개)
+def create_shopping_cart():
+    """쇼핑카트를 생성하는 함수"""
+    cart = {
+        'items': [],
+        'total_price': 0
+    }
+    return cart
+
+def add_item(cart, item, price):
+    """카트에 상품을 추가하는 함수"""
+    cart['items'].append((item, price))
+    cart['total_price'] += price
+
+def checkout(cart, payment_strategy):
+    """결제 전략을 주입받아서 결제 처리하는 함수"""
+    return payment_strategy(cart['total_price'])
+
+# 다양한 결제 전략들
+def credit_card_payment(amount):
+    print(f"신용카드로 {amount}원 결제")
+    return {"method": "credit_card", "amount": amount, "fee": 0}
+
+def mobile_payment(amount):
+    print(f"모바일로 {amount}원 결제")
+    discount = amount * 0.10  # 10% 할인
+    final_amount = amount - discount
+    print(f"모바일 할인: {discount}원")
+    return {"method": "mobile", "amount": final_amount, "fee": 0}
+
+def bank_transfer(amount):
+    print(f"계좌이체로 {amount}원 결제")
+    fee = 500  # 수수료
+    final_amount = amount + fee
+    print(f"이체 수수료: {fee}원")
+    return {"method": "bank", "amount": final_amount, "fee": fee}
+
+cart = create_shopping_cart()
+add_item(cart, "노트북", 100000)
+add_item(cart, "마우스", 20000)
+
+# 실행 시점에 전략(결제 방법) 선택
+print("=== 신용카드 결제 ===")
+result1 = checkout(cart, credit_card_payment)
+
+print("\n=== 모바일 결제 ===")
+result2 = checkout(cart, mobile_payment)
+
+print("\n=== 계좌이체 ===")
+result3 = checkout(cart, bank_transfer)
 
 
-def print_document(fx):
-    print("---------")
-    print("문서를 출력합니다")  # 문서 출력
-    print("출력완료!")
-    fx()  # 알려주는 방법만 다르고 나머지 흐름이 동일
-    print("정리시작")
-    print("정리완료")
-    print("---------")
+################################################
 
 
-def notify_by_email():
-    print("이메일 전송")
+# 사용자 입력 검증 시스템
+def validate_input(user_input, validation_strategy):
+    """사용자 입력을 검증하는 고차함수"""
+    return validation_strategy(user_input)
 
+# 검증 전략들
+def password_validation(password):
+    """비밀번호 검증: 8자 이상, 특수문자 포함"""
+    if len(password) < 8:
+        return {"valid": False, "message": "비밀번호는 8자 이상이어야 합니다"}
+    if not any(char in "!@#$%^&*" for char in password):
+        return {"valid": False, "message": "특수문자를 포함해야 합니다"}
+    return {"valid": True, "message": "유효한 비밀번호입니다"}
 
-def notify_by_sms():
-    print("문자 전송")
+def email_validation(email):
+    """이메일 검증: @ 포함, .com 또는 .kr로 끝남"""
+    if "@" not in email:
+        return {"valid": False, "message": "이메일에 @가 없습니다"}
+    if not (email.endswith(".com") or email.endswith(".kr")):
+        return {"valid": False, "message": "이메일이 .com 또는 .kr로 끝나야 합니다"}
+    return {"valid": True, "message": "유효한 이메일입니다"}
 
+def phone_validation(phone):
+    """전화번호 검증: 010으로 시작, 11자리 숫자"""
+    # 하이픈 제거
+    phone = phone.replace("-", "")
+    if not phone.startswith("010"):
+        return {"valid": False, "message": "010으로 시작해야 합니다"}
+    if len(phone) != 11 or not phone.isdigit():
+        return {"valid": False, "message": "11자리 숫자여야 합니다"}
+    return {"valid": True, "message": "유효한 전화번호입니다"}
 
-def notify_by_kakao():
-    print("카카오톡 전송")
+# 사용 예시
+print("=== 비밀번호 검증 ===")
+result1 = validate_input("1234", password_validation)
+print(result1["message"])
 
+result2 = validate_input("mypassword!@", password_validation)
+print(result2["message"])
 
-print_document(notify_by_email)
-print_document(notify_by_sms)
-print_document(notify_by_kakao)
+print("\n=== 이메일 검증 ===")
+result3 = validate_input("testgmail.com", email_validation)
+print(result3["message"])
 
+result4 = validate_input("test@gmail.com", email_validation)
+print(result4["message"])
 
-# 배달앱(결제)
-def delivery_order(payment_function):
-    # 주문 한 음식들 total_price 계산
-    # 계산결과 15000원이 나옴
-    total_price = 15000
-    payment_function(total_price)
+print("\n=== 전화번호 검증 ===")
+result5 = validate_input("010-1234-5678", phone_validation)
+print(result5["message"])
 
-
-def credit_card(price):
-    print("카드로 결제!")
-    # PG회사랑 연동되는 코드
-    return price
-
-
-def kakao_payment(price):
-    print("카카오로 결제!")
-    return price
-
-
-# naver결제 : naver_payment
-# 이벤트: 15000원 이상 주문시, 1000원 할인
-def naver_payment(price):
-    print("네이버로 결제!")
-    return price - 1000
-
-
-# 장점 - 새로운 payment방법이 생겨나도, delivery_order를 바꾸지 않아도 된다.
-# 각 payment에 맞춰서 디테일을 바꿔 줄 수 있다.
-# 새로운 payment가 생기면 그 payment에 대한 함수만 만들어서 넘기면 된다.
