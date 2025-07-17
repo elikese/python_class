@@ -141,3 +141,72 @@ class Character:
 # 실습) Character 클래스를 상속받는 Warrior(전사), Mage(마법사)를 구현
 #  Warrior(전사)와 Mage(마법사) attack을 오버라이드해서
 # 전사는 검으로 공격 / 마법사는 파이어 볼로 공격, 각각 데미지도 다르게 오버라이드 해보세요
+
+
+
+# 상속을 통한 프로토타입 패턴
+
+class Robot:
+    """
+    복잡한 로봇 클래스 (매개변수가 너무 많음)
+    """
+
+    def __init__(self, name, speed, power, color, size, voice, battery):
+        self.name = name
+        self.speed = speed  # 속도 (1-10)
+        self.power = power  # 힘 (1-10)
+        self.color = color  # 색깔
+        self.size = size  # 크기 (small/medium/large)
+        self.voice = voice  # 목소리 타입
+        self.battery = battery  # 배터리 용량
+
+        print(f"{name} 로봇 생성됨!")
+        print(f"설정: 속도={speed}, 힘={power}, 색깔={color}")
+
+    def move(self):
+        print(f"{self.name}이 속도 {self.speed}로 움직입니다!")
+
+    def work(self):
+        print(f"{self.name}이 힘 {self.power}로 일합니다!")
+
+
+# 문제: 매번 이렇게 긴 매개변수를 다 써야 함
+# robot = Robot("테스트봇", 5, 7, "파란색", "medium", "기계음", 100)
+
+
+class HomeRobot(Robot):
+    """
+    집안일용 로봇 - 이름만 정하면 됨
+    (청소, 요리 등에 적합한 기본 설정)
+    """
+
+    def __init__(self, name):
+        # 집안일용으로 최적화된 기본값 사용
+        super().__init__(
+            name = name,
+            speed = 3,  # 천천히 (안전하게)
+            power = 5,  # 적당한 힘
+            color = "흰색",  # 깔끔한 색
+            size = "medium",  # 적당한 크기
+            voice = "부드러운",  # 친근한 목소리
+            battery = 80  # 하루 종일 사용 가능
+        )
+
+
+class WorkerRobot(Robot):
+    """
+    공장용 로봇 - 이름만 정하면 됨
+    (무거운 일에 적합한 기본 설정)
+    """
+
+    def __init__(self, name):
+        # 공장용으로 최적화된 기본값 사용
+        super().__init__(
+            name=name,
+            speed=8,  # 빠르게
+            power=10,  # 최대 힘
+            color="노란색",  # 주의 색상
+            size="large",  # 큰 크기
+            voice="기계음",  # 명확한 음성
+            battery=120  # 장시간 작업 가능
+        )

@@ -40,10 +40,10 @@ class BankAccount:
     def __init__(self, name, balance):
         self.name = name
         self.balance = balance
-        BankAccount.count += 1  # 질문가능성 있음(a_pakage)
+        BankAccount.count += 1  # 질문가능성 있음
 
 
-# (a_pakage)에 대한 설명
+# 질문가능성
 # class 안의 함수는 클래스 변수를 참조할 수 없음
 # 함수안의 함수 -> 하위함수가 상위함수의 변수를 참조 할 수 있음
 # 어려운 설명 : class는 dict기반으로 만들어진 type의 인스턴스이다.
@@ -61,6 +61,35 @@ print(bank_name1 == bank_name2)  # 같은 메모리주소를 공유하는 거구
 print(bank_name1 == bank_name3)  # 같은 메모리주소를 공유하는 거구나
 
 print(f"현재 개설된 계좌수: {BankAccount.count}")
+
+# 변경하려면 클래스로 참조해서 변경해야한다
+BankAccount.bank_name = "신한"
+print(BankAccount.bank_name)
+
+
+# 실습
+class Student:
+    """
+    학생 클래스 연습용
+
+    요구사항:
+    1. 모든 학생은 같은 학교에 다님 (클래스 변수)
+    2. 학생이 만들어질 때마다 총 학생 수 카운트 (클래스 변수)
+    3. 각 학생마다 이름이 다름 (인스턴스 변수)
+    """
+
+    # TODO: 여기에 클래스 변수 2개를 만드세요
+    # 힌트: school = "?" , student_count = ?
+
+    def __init__(self, name):
+        # TODO: 학생 이름을 저장하세요 (self.name = ?)
+        # TODO: 학생 수를 1 증가시키세요 (Student.student_count += 1)
+        pass
+
+    def introduce(self):
+        # TODO: "안녕하세요, 저는 {이름}입니다. {학교}에 다닙니다." 출력하세요
+        pass
+
 
 
 # 상속
