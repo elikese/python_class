@@ -31,10 +31,41 @@ class Person(object):
         elif isinstance(other, int):
             return self.age > other
 
+    def __le__(self, other):  # <= (less than or equal)
+        if isinstance(other, Person):
+            return self.age <= other.age
+        elif isinstance(other, int):
+            return self.age <= other
+
+    def __ge__(self, other):  # >= (greater than or equal)
+        if isinstance(other, Person):
+            return self.age >= other.age
+        elif isinstance(other, int):
+            return self.age >= other
+
     def __add__(self, other):
         if isinstance(other, int):
             self.age += other
+            return self
+        return None
 
+    def __sub__(self, other):
+        if isinstance(other, int):
+            self.age -= other
+            return self
+        return None
+
+    def __mul__(self, other):
+        if isinstance(other, int):
+            self.age *= other
+            return self
+        return None
+
+    def __truediv__(self, other):
+        if isinstance(other, int):
+            self.age /= other  # 또는 self.age = int(self.age / other)
+            return self
+        return None
 
 person1 = Person("홍길동")
 person2 = Person("홍길동")
@@ -86,12 +117,12 @@ class BankAccount:
             return None
 
         memory_address = super().__new__(cls)
+        BankAccount.count += 1
         return memory_address
 
     def __init__(self, **info):
         self.name = info.get("name")
         self.balance = info.get("balance")
-        BankAccount.count += 1
         BankAccount.clients.append(self)
 
     def transfer(self, opponent_name, amount):
@@ -125,16 +156,18 @@ class BankAccount:
 
 class Setting:
     instance_memory_address = None
+    _initialized = False
 
     def __new__(cls, mode):
         if Setting.instance_memory_address is None:
             print("새 인스턴스 생성")
             Setting.instance_memory_address = super().__new__(cls)
-
         return Setting.instance_memory_address
 
     def __init__(self, mode):
-        self.mode = mode
+        if not Setting._initialized:
+            self.mode = mode
+            Setting._initialized = True
 
     def print_mode(self):
         print(self.mode)
@@ -143,4 +176,4 @@ class Setting:
 mode1 = Setting("light")
 mode1.print_mode()
 mode2 = Setting("dark")
-mode1.print_mode()
+mode1.print_mode() # 여전히 light 모드로 고정되어있다
