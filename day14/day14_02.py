@@ -59,9 +59,7 @@ except NegativeScoreError as e:  # e : 해당 Error의 인스턴스
 
 class ShortPasswordError(Exception):
     def __init__(self, password):
-        self.message = (
-            f"비밀번호는 8자 이상이어야 합니다. 현재 비밀번호 길이:{len(password)}"
-        )
+        self.message = f"비밀번호는 8자 이상이어야 합니다. 현재 비밀번호 길이:{len(password)}"
         super().__init__(self.message)
 
 
@@ -96,3 +94,13 @@ except InvalidEmailError as e:
     print(e)
 else:
     print(f"올바른 이메일 입니다: {email}")
+
+"""
+오류를 의도적으로 일으키는 이유
+하나라도 실패하면 전체를 취소해야 하는 작업
+명시적으로 예외를 발생시키는 게 올바른 방식
+
+복잡한 로직에서 중단 시점을 통제하기 위해
+여러 단계를 거쳐 처리하는 데이터 가공시, 
+어느 한 조건이 안 맞으면 나머지를 안 해야 함.
+"""
