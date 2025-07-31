@@ -119,7 +119,7 @@ except ZeroDivisionError as e:
     print("에러로그:", e)
 
 # else : 예외 없이 성공했을때 (except에 안걸렸을때 실행되는 코드블럭)
-
+print("======")
 try:
     num = "10살"
     age = int(num)  # 여기서 ValueError 발생 가능

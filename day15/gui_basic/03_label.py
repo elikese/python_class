@@ -23,16 +23,17 @@ label_config2 = {
     "fg": "white",
 }
 
-label_status = {"status": "config1"}
+label_status = "config1"
 
 
 def change():
-    if label_status.get("status") == "config1":
+    global label_status
+    if label_status == "config1":
         label1.config(**label_config2)
-        label_status["status"] = "config2"
-    elif label_status.get("status") == "config2":
+        label_status = "config2"
+    elif label_status == "config2":
         label1.config(**label_config1)
-        label_status["status"] = "config1"
+        label_status = "config1"
 
 
 btn = Button(root, text="클릭!", command=change)
