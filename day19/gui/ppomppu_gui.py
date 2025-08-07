@@ -120,6 +120,9 @@ def load_file_list():
         file_listbox.insert(END, f"{excel_file_name} ({size_kb}KB)")
 
 
+refresh_button.config(command=load_file_list)  # 새로고침 버튼
+
+
 def start_crawl():
     """
     크롤링을 시작하는 함수
@@ -169,6 +172,9 @@ def start_crawl():
         crawl_button.config(state=NORMAL)  # 크롤링 버튼 다시 활성화
 
 
+crawl_button.config(command=start_crawl)  # 크롤링 시작 버튼
+
+
 def save_excel():
     """
     크롤링된 데이터를 엑셀 파일로 저장하는 함수
@@ -200,6 +206,9 @@ def save_excel():
         msgbox.showerror("오류", f"저장에 실패했습니다: {message}")
 
 
+save_button.config(command=save_excel)  # 엑셀 저장 버튼
+
+
 def open_file():
     """
     리스트박스에서 선택된 엑셀 파일을 기본 프로그램으로 여는 함수
@@ -223,6 +232,9 @@ def open_file():
             os.system(f"open {filename}")  # Mac에서 기본 프로그램으로 파일 열기
         except:
             msgbox.showerror("오류", "파일을 열 수 없습니다.")
+
+
+open_button.config(command=open_file)  # 파일 열기 버튼
 
 
 def delete_file():
@@ -249,41 +261,14 @@ def delete_file():
             load_file_list()  # 파일 목록 새로고침
             msgbox.showinfo("완료", "파일이 삭제되었습니다.")
         except Exception as e:
-            msgbox.showerror("오류", f"파일 삭제 실패: {str(e)}")
+            msgbox.showerror("오류", f"파일 삭제 실패: {e}")
 
 
-# =============================================================================
-# 이벤트 연결 (버튼 클릭시 실행할 함수 지정)
-# =============================================================================
-crawl_button.config(command=start_crawl)  # 크롤링 시작 버튼
-save_button.config(command=save_excel)  # 엑셀 저장 버튼
-refresh_button.config(command=load_file_list)  # 새로고침 버튼
-open_button.config(command=open_file)  # 파일 열기 버튼
 delete_button.config(command=delete_file)  # 파일 삭제 버튼
+
 
 # =============================================================================
 # 프로그램 초기화 및 실행
 # =============================================================================
 load_file_list()  # 프로그램 시작시 기존 파일 목록 로드
 root.mainloop()  # GUI 이벤트 루프 시작 (프로그램 종료까지 대기)
-
-
-# =============================================================================
-# GUI 프로그래밍 개념 설명:
-#
-# 1. 이벤트 기반 프로그래밍:
-#    - 사용자의 행동(버튼 클릭, 텍스트 입력 등)에 반응해서 함수 실행
-#    - 콜백 함수: 이벤트 발생시 자동으로 호출되는 함수
-#
-# 2. 함수간 데이터 공유:
-#    - 전역 변수: 모든 함수에서 접근 가능한 변수 (crawl_data)
-#    - 함수 반환값: 튜플을 사용해서 여러 값 동시 반환
-#
-# 3. UI 상태 관리:
-#    - 버튼 활성화/비활성화로 사용자 행동 제어
-#    - 실시간 피드백으로 사용자 경험 향상
-#
-# 4. 에러 처리:
-#    - try-except로 예상 가능한 오류 처리
-#    - 사용자 친화적인 에러 메시지 제공
-# =============================================================================
