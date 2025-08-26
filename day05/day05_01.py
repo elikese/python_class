@@ -1,8 +1,20 @@
 # 컬렉션 자료형 복습
 # 리스트 : 불변형 X, 순서 O, 중복 O, 대괄호[1,2,3,4]
+lol = [[1, 2, 3], [4, 5], [6, 7, 8, 9]]
+
+print(lol[0])
+print(lol[2][1])
 # 튜플 : 불변형 O, 순서 O, 중복 O, 소괄호(1,2,3,4)
 # 딕셔너리 : 불변형 X, 순서 O, key 중복 X, 중괄호에 키:밸류{"이름" : "홍길동"}
 # 셋 : 불변형 X, 순서 X, 중복 X, 중괄호 {1,2,3,4}
+a = {"한국", "중국", "일본"}
+a.add("베트남")
+a.add("중국")
+a.remove("일본")
+a.update({"홍콩", "한국", "태국"})
+
+print(a)
+
 
 # 반복문 : 동일한 패턴의 코드를 여러번이 아니라 한번에 작성 하기 위해서 사용 (for문, while문)
 """
@@ -29,7 +41,7 @@ for 숫자 in 숫자리스트:
 print(f"총합:{총합}")
 
 # range(): 숫자가 순서대로 들어있는 가짜리스트를 만들어 준다. -> 리스트가 아님(리스트 처럼쓰려면 list로 형변환)
-# range(a_pakage,b_pakage) -> a부터 b미만 [a_pakage,a_pakage+1,a_pakage+2,.....,b_pakage-1]
+# range(a,b) -> a부터 b미만 [a,a+1,a+2,.....,b-1]
 # range(n) = range(0,n) -> 0부터 n미만 [0,1,2,3,4,......,n-1]
 
 # 리스트로 형변환
@@ -83,18 +95,16 @@ print(*, end="")
 print()
 
 # 2중 for문
-for i in range(2):  # 바깥 반복문
-    print(f"[i={i}] 줄 시작")
-    for j in range(3):  # 안쪽 반복문
-        print(f"  j={j} → 출력")
-    print(f"[i={i}] 줄 끝")
-    print()
-
 """
 바깥 반복 한번당, 안쪽 반복이 전부 도는 구조
-i = 0 -> j = 0, j = 1, j = 2
-i = 1 -> j = 0, j = 1, j = 2
+1주일 -> 7일
 """
+for week in range(1, 5):
+    print(f"{week}주 시작")
+    for day in range(1, 8):
+        print(f"{day}일", end=" ")
+    print()
+    print(f"{week}주 끝")
 
 # 구구단
 for 단 in range(2, 10):
