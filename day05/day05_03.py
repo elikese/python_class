@@ -1,3 +1,24 @@
+# 저번시간 복습
+# for (반복마다 넘겨져 오는 요소를 담을 변수) in 전체
+
+짬뽕리스트 = ["안녕", "하세요", 12, False]
+
+for 짬뽕데이터 in 짬뽕리스트:
+    print(짬뽕데이터, end=", ")
+print()
+
+# range(a_pakage,b_pakage) -> a_pakage 이상 b_pakage 미만의 숫자가 순서대로 담긴 리스트 비슷한 것을 만들어준다.
+for 숫자 in range(1, 11):
+    print(숫자, end=" ")
+print()
+
+# enumerate(리스트 or 리스트비슷한것들) -> 각각의 요소들를 (인덱스,값) 튜플형태로 쌍을 만들어준다.
+이름들 = ["김씨", "박씨", "이씨"]
+for 튜플 in enumerate(이름들):
+    인덱스, 이름 = 튜플  # 튜플 언패킹 (0, "김씨")
+    print(f"{인덱스}번 이름:{이름}", end=", ")
+print()
+
 import math
 
 # 실습) 1사분면에 있는 좌표들만 모아서 출력해주세요
