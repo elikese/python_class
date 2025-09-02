@@ -118,15 +118,18 @@ def is_valid_pn(pn):
         return False
 
     # 월 검사
-    if int(pn[2:4]) < 1 or int(pn[2:4]) > 12:
+    월 = int(pn[2:4])
+    if 월 < 1 or 월 > 12:
         return False
 
     # 일 검사
-    if int(pn[4:6]) < 1 or int(pn[4:6]) > 31:
+    일 = int(pn[4:6])
+    if 일 < 1 or 일 > 31:
         return False
 
     # 성별 숫자 검사
-    if int(pn[6]) < 1 or int(pn[6]) > 4:
+    성별코드 = int(pn[6])
+    if 성별코드 < 1 or 성별코드 > 4:
         return False
 
     return True
