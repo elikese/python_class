@@ -41,6 +41,16 @@ def greet_person(name):  # name은 매개 "변수": 함수안에서만 유효한
 # 함수는 name이라는 매개변수에 "홍길동"이라는 값을 저장 함.
 greet_person("홍길동")
 
+# 실습) 이름과 나이를 매개변수로 전달, 출력
+# 안녕하세요. 제 이름은 ***이고 나이는 **입니다.
+
+
+def introduce(name, age):
+    print(f"안녕하세요. 제 이름은 {name}이고 나이는 {age}입니다.")
+
+
+introduce("박화목", 30)
+
 name1 = "홍길동"
 name2 = name1
 print(f"name2: {name2}")
@@ -68,8 +78,23 @@ def add(x, y):
 result = add(3, 5)
 print(result)
 print(f"add(1,2) 호출 결과: {add(1, 2)}")
+# 함수의 호출결과는 값이면 값, 객체면 객체처럼 다룰 수 있다.
 add(add(1, 2), 3)  # 리턴이 있으면 값이 되니까 값으로서 바로 사용이 가능
 
+
+# 점수를 담은 리스트를 매개변수로 받아서
+# 평균을 리턴하는 함수를 만들어주세요
+def cal_average(score_list):
+    total = sum(score_list)
+    return round(total / len(score_list))
+
+
+score_list1 = [55, 70, 100]
+score_list2 = [100, 98, 85]
+score_list3 = [40, 90, 70]
+print(cal_average(score_list1))
+print(cal_average(score_list2))
+print(cal_average(score_list3))
 
 # 주민등록번호 처리
 # 9911221234567
@@ -129,6 +154,28 @@ def get_gender(pn):
 
 
 print(get_gender("010103-3122923"))
+
+
+김철수씨 = {
+    "이름": "김철수",
+    "나이": 30,
+    "국적": "대한민국",
+    "성별": "남자",
+    "취미": ["코딩", "독서", "음악감상"],
+}
+
+
+def has_coding_hobby(person):
+    취미들 = person.get("취미")
+    if "코딩" in 취미들:
+        return True
+    return False
+
+
+print(has_coding_hobby(김철수씨))
+
+# 실습) 김철수씨같은 dict를 매개변수로 받아서
+# 국적이 대한민국이면서 20살 이상 성인이면 True, 아니면 False를 리턴하는 함수 정의해주세요
 
 
 # 매개변수에 기본값설정이 가능하다.
