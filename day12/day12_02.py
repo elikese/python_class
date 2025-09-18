@@ -47,43 +47,13 @@ def test_car(car):
     car.drive()
 
 
+print(isinstance(e_car, Car))
+print(isinstance(gas_car, Car))
+
 # drive라는 같은 메서드 -> 다른 동작 : 다형성(polymorphism)
 # 왜 이런걸 하나요?? 기능을 정의하는것(부모): 달린다 / 구체적인 기능을 구현하는걸(자식) 분리
 test_car(e_car)
 test_car(gas_car)
-
-
-# payment를 함수의 조합으로 구현 -> 함수가 함수를 매개변수로 받아서 사용하는 특징을 사용
-
-
-def order(payment, *menu_names):
-    menu = {
-        "피자": 25000,
-        "치킨": 20000,
-    }
-    price = 0
-    for menu_name in menu_names:
-        price += menu[menu_name]
-
-    final_price = payment(price)
-    print(f"총 결제금액: {final_price}")
-
-
-def kakao_payment(price):
-    # 항상 10프로 할인
-    return price * 0.9
-
-
-def naver_payment(price):
-    # 주문금액 20000원 이상이면 2000원 할인
-    if price >= 20000:
-        return price - 2000
-
-    return price
-
-
-# 함수에 함수를 전달해서, 구체적인 기능구현을 분리
-order(naver_payment, "피자", "치킨")
 
 
 class Payment:
@@ -107,6 +77,10 @@ class NaverPayment(Payment):
 
 
 def order(payment_instance, *menu_names):
+    if not isinstance(payment_instance, Payment):
+        print("올바른 결제방법을 선택하세요")
+        return False
+
     menu = {
         "피자": 25000,
         "치킨": 20000,
@@ -143,9 +117,71 @@ class Character:
 # 전사는 검으로 공격 / 마법사는 파이어 볼로 공격, 각각 데미지도 다르게 오버라이드 해보세요
 
 
+class Character:
+    def __init__(self, nick_name):
+        self.nick_name = nick_name
+        self.HP = 100
+
+    def attack(self, opponent):
+        dmg = 10
+        print(f"{opponent.nick_name}을 기본 공격({dmg})합니다")
+        opponent.HP -= 10
+
+
+class Warrior(Character):
+    def attack(self, opponent: Character):
+        dmg = 15
+        print(f"{self.nick_name} → {opponent.nick_name}: 검공격({dmg}) ⚔️")
+        opponent.HP -= dmg
+
+
+class Mage(Character):
+    def attack(self, opponent: Character):
+        dmg = 20
+        print(f"{self.nick_name} → {opponent.nick_name}: 파이어볼({dmg})")
+        opponent.HP -= dmg
+
+
+import random
+import time
+
+
+def battle(char1, char2):
+
+    if not isinstance(char1, Character) or not isinstance(char2, Character):
+        return
+
+    print(f"전투시작! {char1.nick_name} vs {char2.nick_name}")
+
+    while True:
+        if char1.HP <= 0 or char2.HP <= 0:
+            break
+
+        input(">>>엔터를 눌러 주사위를 굴립니다")
+        dice = random.randint(1, 6)
+        is_even = dice % 2 == 0
+
+        attacker = char2 if is_even else char1
+        defender = char1 if is_even else char2
+        attacker, defender = (char1, char2) if is_even else (char2, char1)
+
+        print(f"{dice} -> {'짝수' if is_even else '홀수'} -> {attacker.nick_name}의 턴!!")
+        time.sleep(0.5)
+        attacker.attack(defender)
+        time.sleep(0.5)
+        print("====현재 상황====")
+        print(f"{attacker.nick_name}의 체력:{attacker.HP}, {defender.nick_name}의 체력:{defender.HP}")
+
+        if defender.HP <= 0:
+            print(f"{attacker.nick_name} 승리!")
+
+
+char1 = Warrior("타락파워전사")
+char2 = Mage("썬콜")
+battle(char1, char2)
+
 
 # 상속을 통한 프로토타입 패턴
-
 class Robot:
     """
     복잡한 로봇 클래스 (매개변수가 너무 많음)
@@ -183,13 +219,13 @@ class HomeRobot(Robot):
     def __init__(self, name):
         # 집안일용으로 최적화된 기본값 사용
         super().__init__(
-            name = name,
-            speed = 3,  # 천천히 (안전하게)
-            power = 5,  # 적당한 힘
-            color = "흰색",  # 깔끔한 색
-            size = "medium",  # 적당한 크기
-            voice = "부드러운",  # 친근한 목소리
-            battery = 80  # 하루 종일 사용 가능
+            name=name,
+            speed=3,  # 천천히 (안전하게)
+            power=5,  # 적당한 힘
+            color="흰색",  # 깔끔한 색
+            size="medium",  # 적당한 크기
+            voice="부드러운",  # 친근한 목소리
+            battery=80,  # 하루 종일 사용 가능
         )
 
 
@@ -208,5 +244,5 @@ class WorkerRobot(Robot):
             color="노란색",  # 주의 색상
             size="large",  # 큰 크기
             voice="기계음",  # 명확한 음성
-            battery=120  # 장시간 작업 가능
+            battery=120,  # 장시간 작업 가능
         )
