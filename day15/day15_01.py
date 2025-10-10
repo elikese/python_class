@@ -37,7 +37,7 @@ print([num1 * num2 for num1 in a for num2 in b])
 
 grades = ["5학년", "6학년"]
 classes = ["A반", "B반"]
-print([f"{grade}-{classe}" for grade in grades for classe in classes])
+print([f"{grade}-{_class}" for grade in grades for _class in classes])
 
 
 # 실습) 리스트 컴프리헨션으로 영화관 좌석을

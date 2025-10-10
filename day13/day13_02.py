@@ -22,13 +22,14 @@ class Person:
 
 # 사용 예시
 person = Person("홍길동", 25, "개발자")
-print(person["name"])       # 홍길동
-print(person["birth_year"]) # 2000 (계산된 값!)
-print(person["adult"])      # True
-print(person["category"])   # 성인
+print(person["name"])  # 홍길동
+print(person["birth_year"])  # 2000 (계산된 값!)
+print(person["adult"])  # True
+print(person["category"])  # 성인
 
 
 class Config:
+
     def __init__(self):
         self.data = {"host": "www.naver.com", "port": 443}
 
@@ -41,11 +42,12 @@ class Config:
         else:
             return self.data.get(key)
 
+
 # 사용 예시
 config = Config()
-print(config["host"])       # localhost
-print(config["url"])        # http://localhost:8080 (조합된 값!)
-print(config["debug_info"]) # 서버: localhost, 포트: 8080
+print(config["host"])  # localhost
+print(config["url"])  # http://localhost:8080 (조합된 값!)
+print(config["debug_info"])  # 서버: localhost, 포트: 8080
 print(config["1212"])
 
 
@@ -64,6 +66,7 @@ print(person2["gender"])     # 여성
 print(person2["birth_year"]) # 2002
 print(person2["birthday"])   # 11월 15일
 """
+
 
 class Person:
     def __init__(self, ssn):
@@ -99,8 +102,6 @@ class Person:
             return "지원하지 않는 정보입니다"
 
 
-
-
 # __call__()
 class EventLogger:
     def __init__(self, name):
@@ -109,6 +110,7 @@ class EventLogger:
 
     def __call__(self, message, level="INFO"):
         import datetime
+
         timestamp = datetime.datetime.now().strftime("%H:%M:%S")
         log_entry = f"[{timestamp}] {level}: {message}"
         self.logs.append(log_entry)
