@@ -152,8 +152,8 @@ header_font = Font(bold=True, color="FFFFFF")
 header_fill = PatternFill(start_color="366092", end_color="366092", fill_type="solid")
 header_alignment = Alignment(horizontal="center", vertical="center")
 
-for col_num, header in enumerate(headers, 1):
-    cell = ws.cell(row=1, column=col_num)
+for col_num, header in enumerate(headers):
+    cell = ws.cell(row=1, column=col_num + 1)
     cell.font = header_font
     cell.fill = header_fill
     cell.alignment = header_alignment
@@ -186,7 +186,7 @@ for webtoon_dict in webtoon_list:
         cell = new_ws.cell(row=1, column=col_num)
         cell.font = Font(bold=True)
         cell.fill = PatternFill(start_color="E6E6FA", end_color="E6E6FA", fill_type="solid")
-        cell.alignment = Alignment(horizontal="center")
+        cell.alignment = Alignment(horizontal="center", vertical="center")
 
     # 데이터 추가
     for idx, item in enumerate(webtoon_dict["webtoon_items"]):
