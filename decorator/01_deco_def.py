@@ -7,9 +7,8 @@
 #   → 보통 함수를 감싸서 "새로운 함수(래퍼)"를 반환한다.
 #
 # 클래스의 경우:
-#   Cls = decorator(Cls)
-#   → 보통 클래스를 감싸서 "클래스 자체를 수정하거나", "새 클래스를 반환하거나",
-#     또는 "클래스 인스턴스(객체)를 반환"할 수 있다.
+#   Obj = Cls(func)
+#   → 보통 "클래스 인스턴스(객체)를 반환"할 수 있다.
 #     (이 경우 함수처럼 '객체화'되어 동작할 수도 있음)
 #
 # 즉, 함수는 대부분 "함수를 감싸는 함수"로 변하고,
@@ -98,9 +97,6 @@ def validate_name(func):
         if not name.strip():
             print("[ERROR] 이름이 비어 있습니다.")
             return None
-        if any([ch.isdigit() for ch in name]):
-            print("[ERROR] 이름에 숫자가 들어갈 수 없습니다.")
-            return None
         return func(name)
 
     return wrapper
@@ -120,4 +116,3 @@ def greet(name):
 greet("철수")  # ✅ 정상
 greet("")  # ❌ 빈 문자열
 greet(123)  # ❌ 타입 오류
-greet("영희123")  # ❌ 숫자 포함

@@ -1,3 +1,20 @@
+class Greeter:
+    def __init__(self, name):
+        self.name = name
+
+    # 함수처럼 동작하는 객체
+    def __call__(self, time):
+        print(f"좋은{time}입니다, {self.name}님!")
+
+
+# 객체 생성
+greet = Greeter("홍길동")
+
+# ✅ 객체를 함수처럼 호출할 수 있음
+# 실제로는 greet.__call__("아침") 호출
+greet("아침")
+
+
 class Logger:
     def __init__(self, func):
         self.func = func  # 감쌀 함수 저장
@@ -57,7 +74,9 @@ print(double(3))  # (3*2)^2 = 36
 print(triple(2))  # (2*3)^3 = 216
 
 
+# 자주쓰는 객체들은 미리 정의해 둘 수 있음.
 class MathTools:
+    # 클래스 변수에 담겨 있는 객체들
     square = Power(2)
     cube = Power(3)
     quad = Power(4)
